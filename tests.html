@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>Tests</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        @font-face {
+            font-family: 'Helvetica Neue';
+            src: local("Helvetica Neue Light"), local("HelveticaNeue-Light"), url("/fonts/HelveticaNeue-Light.ttf") format("truetype"), url("/fonts/HelveticaNeue-Light.woff") format("woff");
+            font-weight: 300;
+        }
+        @font-face {
+            font-family: 'Helvetica Neue';
+            src: local("Helvetica Neue Medium"), local("HelveticaNeue-Medium"), url("/fonts/HelveticaNeue-Medium.ttf") format("truetype"), url("/fonts/HelveticaNeue-Medium.woff") format("woff");
+            font-weight: 500;
+        }
+        body {
+            background: black;
+            color: white;
+            -webkit-font-smoothing: antialiased;
+            font-family: "Helvetica Neue", sans-serif;
+            font-weight: 300;
+            font-size: 12px;
+            line-height: 1.2;
+        }
+        li {
+            list-style: none;
+        }
+        .pass:before {
+            content: 'PASS: ';
+            color: blue;
+        }
+        .fail:before {
+            content: 'FAIL: ';
+            color: red;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <ul id="output"></ul>
+    <script type="text/javascript" src="js/framework7.min.js"></script>
+    <!--<script type="text/javascript" src="js/kitchen-sink.js"></script>-->
+    <script type="text/javascript" src="js/Array.js"></script>
+    <!--<script type="text/javascript" src="js/Chart.min.js"></script>-->
+    <!--<script type="text/javascript" src="js/Date.js"></script>-->
+    <script type="text/javascript" src="js/Usuario.js"></script>
+    <!--<script type="text/javascript" src="js/app.js"></script>-->
+    <script>
+        var output = document.getElementById('output');
+
+        function assert(property, equals) {
+            var li = document.createElement('li');
+            li.className = 'fail';
+            li.appendChild(document.createTextNode(property));
+            li.appendChild(document.createTextNode(': '));
+            try {
+                if (typeof (equals) !== 'function' || !(new equals instanceof Error)) {
+                    li.className = eval(property + ' === ' + equals) ? 'pass' : 'fail';
+                } else
+                    try {
+                        eval(property);
+                    } catch (e) {
+                        li.className = e instanceof equals ? 'pass' : 'fail';
+                    }
+                li.appendChild(document.createTextNode((equals instanceof Error) ? equals.name : equals));
+            } catch (e) {
+                li.className = 'fail';
+                li.appendChild(document.createTextNode(e));
+            }
+            output.appendChild(li);
+        }
+        /**
+         * Validamos nulos
+         */
+        window.localStorage.clear();
+        for (var property in Usuario) {
+            if (Usuario.hasOwnProperty(property)) {
+                assert('Usuario.' + property, ReferenceError)
+            }
+        }
+        for (var property in Usuario) {
+            if (Usuario.hasOwnProperty(property) &&
+                property !== 'caloriasDiariasNecesarias' &&
+                property !== 'edad' &&
+                property !== 'IMC' &&
+                property !== 'mes' &&
+                property !== 'meses' &&
+                property !== 'pesoIdeal' &&
+                property !== 'pesoMaximoUltimoMes' &&
+                property !== 'pesoMinimoUltimoMes' &&
+                property !== 'semana' &&
+                property !== 'semanas' &&
+                property !== 'seHaPesadoEstaSemana' &&
+                property !== 'TMB')
+                assert('(Usuario.' + property + ' = null)', ReferenceError)
+        }
+        /**
+         * Validamos number
+         */
+        for (var property in Usuario) {
+            if (Usuario.hasOwnProperty(property)) {
+                window.localStorage.setItem(property, 1);
+            }
+        }
+        for (var property in Usuario) {
+            if (Usuario.hasOwnProperty(property)) {
+                if (property === 'actividad' ||
+                    property === 'altura')
+                    assert('Usuario.' + property, 1);
+                else if (property === 'pesoIdeal')
+                    assert('Usuario.' + property, 21.75)
+                else
+                    assert('Usuario.' + property, TypeError)
+            }
+        }
+        for (var property in Usuario) {
+            if (Usuario.hasOwnProperty(property) &&
+                property !== 'caloriasDiariasNecesarias' &&
+                property !== 'edad' &&
+                property !== 'IMC' &&
+                property !== 'mes' &&
+                property !== 'meses' &&
+                property !== 'pesoIdeal' &&
+                property !== 'pesoMaximoUltimoMes' &&
+                property !== 'pesoMinimoUltimoMes' &&
+                property !== 'semana' &&
+                property !== 'semanas' &&
+                property !== 'seHaPesadoEstaSemana' &&
+                property !== 'TMB')
+                if (property === 'actividad' ||
+                    property === 'altura')
+                    assert('(Usuario.' + property + ' = 1)', 1);
+                else
+                    assert('(Usuario.' + property + ' = 1)', TypeError);
+
+        }
+        /**
+         * Validamos string
+         */
+        window.localStorage.clear();
+        for (var property in Usuario) {
+            if (Usuario.hasOwnProperty(property)) {
+                window.localStorage.setItem(property, 'a');
+            }
+        }
+        for (var property in Usuario) {
+            if (Usuario.hasOwnProperty(property)) {
+                assert('Usuario.' + property, SyntaxError)
+            }
+        }
+        for (var property in Usuario) {
+            if (Usuario.hasOwnProperty(property)) {
+                window.localStorage.setItem(property, '"a"');
+            }
+        }
+        for (var property in Usuario) {
+            if (Usuario.hasOwnProperty(property)) {
+                if (property === 'nombre' ||
+                    property === 'sexo')
+                    assert('Usuario.' + property, '"a"');
+                else
+                    assert('Usuario.' + property, TypeError)
+            }
+        }
+        for (var property in Usuario) {
+            if (Usuario.hasOwnProperty(property) &&
+                property !== 'caloriasDiariasNecesarias' &&
+                property !== 'edad' &&
+                property !== 'IMC' &&
+                property !== 'mes' &&
+                property !== 'meses' &&
+                property !== 'pesoIdeal' &&
+                property !== 'pesoMaximoUltimoMes' &&
+                property !== 'pesoMinimoUltimoMes' &&
+                property !== 'semana' &&
+                property !== 'semanas' &&
+                property !== 'seHaPesadoEstaSemana' &&
+                property !== 'TMB')
+                if (property === 'nombre' ||
+                    property === 'sexo')
+                    assert('(Usuario.' + property + ' = "a")', '"a"');
+                else
+                    assert('(Usuario.' + property + ' = "a")', TypeError);
+
+        }
+        /**
+         * Validamos string
+         */
+        window.localStorage.clear();
+        for (var property in Usuario) {
+            if (Usuario.hasOwnProperty(property)) {
+                window.localStorage.setItem(property, '[]');
+            }
+        }
+        for (var property in Usuario) {
+            if (Usuario.hasOwnProperty(property)) {
+                if (property === 'peso' ||
+                    property === 'sexo')
+                    assert('(Usuario.' + property + ' = "a")', '"a"');
+                else
+                    assert('Usuario.' + property, TypeError)
+            }
+        }
+
+
+
+
+
+
+
+
+
+         //window.localStorage.setItem('altura', 1); assert(Usuario.altura == 1, 'Usuario.altura == 1');
+         //window.localStorage.setItem('actividad', 1); assert(Usuario.actividad == 1, 'Usuario.actividad == 1');
+         //window.localStorage.setItem('fechaInicio', 1); try { Usuario.fechaInicio } catch (e) { assert(e.toString() === new Error('window.localStorage.getItem(\'fechaInicio\') not Date').toString(), 'Usuario.fechaInicio == 1') };
+         //window.localStorage.setItem('fechaNacimiento', 1); try { Usuario.fechaNacimiento } catch (e) { assert(e.toString() === new Error('window.localStorage.getItem(\'fechaNacimiento\') not Date').toString(), 'Usuario.fechaNacimiento == 1') };
+         //window.localStorage.setItem('edad', 1); assert(Usuario.edad == 13, 'Usuario.edad == 13');
+         //window.localStorage.setItem('mes', 1); assert(+Usuario.mes == +new Date(2014, 5 - 1, 5), 'Usuario.+mes == +new Date(2014, 5 - 1, 5)');
+         //window.localStorage.setItem('meses', 1); assert(Usuario.meses, 1, 'Usuario.meses, 1');
+         //window.localStorage.setItem('nombre', 1); assert(Usuario.nombre, 1, 'Usuario.nombre, 1');
+         //window.localStorage.setItem('pesos', 1); assert(Usuario.pesos, 1, 'Usuario.pesos, 1');
+         //window.localStorage.setItem('pesoMaximoUltimoMes', 1); assert(Usuario.pesoMaximoUltimoMes, 1, 'Usuario.pesoMaximoUltimoMes, 1');
+         //window.localStorage.setItem('pesoMinimoUltimoMes', 1); assert(Usuario.pesoMinimoUltimoMes, 1, 'Usuario.pesoMinimoUltimoMes, 1');
+         //window.localStorage.setItem('peso', 1); assert(Usuario.peso, 1, 'Usuario.peso, 1');
+         //window.localStorage.setItem('IMC', 1); assert(Usuario.IMC, 1, 'Usuario.IMC, 1');
+         //window.localStorage.setItem('semana', 1); assert(Usuario.semana, 1, 'Usuario.semana, 1');
+         //window.localStorage.setItem('semanas', 1); assert(Usuario.semanas, 1, 'Usuario.semanas, 1');
+         //window.localStorage.setItem('seHaPesadoEstaSemana', 1); assert(Usuario.seHaPesadoEstaSemana, 1, 'Usuario.seHaPesadoEstaSemana, 1');
+         //window.localStorage.setItem('sexo', 1); assert(Usuario.sexo, 1, 'Usuario.sexo, 1');
+         //window.localStorage.setItem('TMB', 1); assert(Usuario.TMB, 1, 'Usuario.TMB, 1');
+         //window.localStorage.setItem('caloriasDiariasNecesarias', 1); assert(Usuario.caloriasDiariasNecesarias, 1, 'Usuario.caloriasDiariasNecesarias, 1');
+         //window.localStorage.setItem('pesoObjetivo', 1); assert(Usuario.pesoObjetivo, 1, 'Usuario.pesoObjetivo, 1');
+         //window.localStorage.setItem('pesosObjetivo', 1); assert(Usuario.pesosObjetivo, 1, 'Usuario.pesosObjetivo, 1');
+         //window.localStorage.setItem('pesoIdeal', 1); assert(Usuario.pesoIdeal, 1, 'Usuario.pesoIdeal, 1');
+        /*window.localStorage.clear();
+        Usuario.actividad = 1;
+        assert(Usuario.actividad, 1, 'Usuario.actividad, 1');
+        Usuario.altura = 1.86;
+        assert(Usuario.altura, 1.86, 'Usuario.altura, 1.86');
+        Usuario.fechaInicio = new Date(2014, 3 - 1, 21);
+        assert(+Usuario.fechaInicio == +new Date(2014, 3 - 1, 21), 'Usuario.+fechaInicio == +new Date(2014, 3 - 1, 21)');
+        Usuario.fechaNacimiento = new Date(1981, 10 - 1, 7);
+        assert(+Usuario.fechaNacimiento == +new Date(1981, 10 - 1, 7), 'Usuario.+fechaNacimiento == +new Date(1981, 10 - 1, 7)');
+        assert(Usuario.edad == 32, 'Usuario.edad == 32');
+        Usuario.nombre = 'Jesús';
+        assert(Usuario.nombre == 'Jesús', 'Usuario.nombre == \'Jesús\'');
+        Usuario.pesos = [85, null, 83, null, 81, null, null];
+        assert(Usuario.pesos.compare([85, 85, 83, 83, 81, 81, 81]), 'Usuario.pesos.compare([85, 85, 83, 83, 81, 81])');
+        assert(Usuario.seHaPesadoEstaSemana == false, 'Usuario.seHaPesadoEstaSemana == false');
+        assert(Usuario.peso == 81, 'Usuario.peso == 81');
+        Usuario.peso = 80;
+        assert(Usuario.peso == 80, 'Usuario.peso == 80');
+        assert(Usuario.pesoMaximoUltimoMes == 81, 'Usuario.pesoMaximoUltimoMes == 81');
+        assert(Usuario.pesoMinimoUltimoMes == 80, 'Usuario.pesoMinimoUltimoMes == 80');
+        assert(Usuario.IMC == 23.12406058503873, 'Usuario.IMC == 23.12406058503873');
+        assert(+Usuario.semana == +new Date(2014, 5 - 1, 9), '+Usuario.semana == +new Date(2014, 5 - 1, 9)');
+        assert(Usuario.semanas.toString() == [
+            new Date(2014, 3 - 1, 21),
+            new Date(2014, 3 - 1, 28),
+            new Date(2014, 4 - 1, 4),
+            new Date(2014, 4 - 1, 11),
+            new Date(2014, 4 - 1, 18),
+            new Date(2014, 4 - 1, 25),
+            new Date(2014, 5 - 1, 2),
+            new Date(2014, 5 - 1, 9)
+        ].toString(), 'Usuario.semanas.toString() == [' +
+            'new Date(2014, 3 - 1, 21),' +
+            'new Date(2014, 3 - 1, 28),' +
+            'new Date(2014, 4 - 1, 4),' +
+            'new Date(2014, 4 - 1, 11),' +
+            'new Date(2014, 4 - 1, 18),' +
+            'new Date(2014, 4 - 1, 25),' +
+            'new Date(2014, 5 - 1, 2)),' +
+            'new Date(2014, 5 - 1, 9)' +
+            '].toString()');
+        Usuario.sexo = 'Masculino';
+        assert(Usuario.sexo == 'Masculino', 'Usuario.sexo == \'Masculino\'');
+        assert(Usuario.TMB == 1807.5, 'Usuario.TMB == 1807.5');
+        assert(Usuario.caloriasDiariasNecesarias == 2169, 'Usuario.caloriasDiariasNecesarias == 2169');
+        assert(+Usuario.mes == +new Date(2014, 4 - 1, 18), '+Usuario.mes == new Date(2014, 4 - 1, 18)');
+        assert(Usuario.meses.toString() == [new Date(2014, 3 - 1, 21), new Date(2014, 4 - 1, 18)].toString(), 'Usuario.meses.toString() == [new Date(2014, 3 - 1, 21), new Date(2014, 4 - 1, 18)].toString()');
+        Usuario.pesosObjetivo = [80, null];
+        assert(Usuario.pesosObjetivo.compare([80, null]), 'Usuario.pesosObjetivo.compare([80, null])');
+        assert(Usuario.pesoObjetivo == 80, 'Usuario.pesoObjetivo == 80');
+        Usuario.pesoObjetivo = 78;
+        assert(Usuario.pesoObjetivo == 78, 'Usuario.pesoObjetivo == 78');
+        assert(Usuario.pesoIdeal == 75.2463, 'Usuario.pesoIdeal == 75.2463');*/
+    </script>
+</body>
+
+</html>

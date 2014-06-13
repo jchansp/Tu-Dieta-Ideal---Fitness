@@ -1,0 +1,966 @@
+/*
+* {
+    -moz-user-select: -moz-none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}*/
+
+html,
+body {
+    overflow: hidden;
+    height: 100%;
+    width: 100%;
+}
+body {
+    background: #FDE7A0;
+}
+/*==============================
+    Blured effect on views
+==============================*/
+
+.views {
+    -webkit-transition-duration: 400ms;
+    -moz-transition-duration: 400ms;
+    -ms-transition-duration: 400ms;
+    -o-transition-duration: 400ms;
+    transition-duration: 400ms;
+    -webkit-filter: blur(0px);
+    -webkit-transform: translate3d(0, 0, 0) scale(1);
+    -moz-transform: translate3d(0, 0, 0) scale(1);
+    -ms-transform: translate3d(0, 0, 0) scale(1);
+    -o-transform: translate3d(0, 0, 0) scale(1);
+    transform: translate3d(0, 0, 0) scale(1);
+}
+.views.blured {
+    -webkit-filter: blur(10px);
+    -webkit-transform: translate3d(0, 0, 0) scale(1.3);
+    -moz-transform: translate3d(0, 0, 0) scale(1.3);
+    -ms-transform: translate3d(0, 0, 0) scale(1.3);
+    -o-transform: translate3d(0, 0, 0) scale(1.3);
+    transform: translate3d(0, 0, 0) scale(1.3);
+}
+/*==============================
+    Pages styling
+==============================*/
+
+.pages {
+    background: #FDE7A0;
+}
+/*.page[data-page=home],
+.page[data-page="detail"] {*/
+
+.page {
+    background: none;
+    background: #FDE7A0 url(../img/bg.jpg) no-repeat center;
+    -webkit-background-size: cover;
+    background-size: cover;
+}
+/* iOS over scrolling fix */
+
+html.ios .page {
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+}
+html.ios .page-content {
+    margin-bottom: 1px;
+}
+.content-block-title {
+    color: #21340C;
+}
+.content-block {
+    color: #755812;
+}
+a {
+    color: #53B021;
+}
+.list-block ul {
+    background: #FDE69F;
+    border-top-color: #F1D888;
+    border-bottom-color: #F1D888;
+}
+.list-block .item-inner {
+    border-bottom-color: #F1D888;
+}
+.list-block .item-after {
+    color: #755812;
+}
+.content-block-inner {
+    background: #FDE69F;
+    border-top-color: #F1D888;
+    border-bottom-color: #F1D888;
+}
+/*==============================
+    Navbar
+==============================*/
+
+.navbar {
+    border-bottom: none;
+    background: #21340C;
+    color: #FDE7A0;
+}
+i.icon.icon-bars-blue {
+    background-image: url("data:image/svg+xml;charset=utf-8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 42 26' fill='%2353B021'><rect width='4' height='4'/><rect x='8' y='1' width='34' height='2'/><rect y='11' width='4' height='4'/><rect x='8' y='12' width='34' height='2'/><rect y='22' width='4' height='4'/><rect x='8' y='23' width='34' height='2'/></svg>");
+}
+i.icon.icon-back-blue {
+    background-image: url("data:image/svg+xml;charset=utf-8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 20' fill='%2353B021'><path d='M10,0l2,2l-8,8l8,8l-2,2L0,10L10,0z'/></svg>");
+}
+.navbar a.link,
+.toolbar a.link {
+    color: #53B021;
+}
+span.navbar-logo {
+    width: 104px;
+    height: 25px;
+    background: url(../img/logo.png) no-repeat center;
+    -webkit-background-size: 100% auto;
+    background-size: 100% auto;
+    display: block;
+}
+i.icon-plus {
+    color: #fff;
+    border-radius: 100%;
+    width: 25px;
+    height: 25px;
+    font-size: 31px;
+    line-height: 20px;
+    text-align: center;
+    font-weight: 100;
+}
+/*==============================
+    Homepage places list
+==============================*/
+
+/*.places-list {
+    margin: 0;
+    color: #fff;
+}
+.places-list ul {
+    background: none;
+    border: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+.places-list a.item-link .item-inner,
+.places-list .item-inner {
+    background: none;
+    padding-right: 15px;
+    border-bottom-color: rgba(255, 255, 255, 0.2);
+}
+.places-list .swipeout-actions {
+    border-bottom-color: rgba(255, 255, 255, 0.2);
+}
+.places-list li:last-child .item-inner,
+.places-list li:last-child a.item-link:active .item-inner {
+    border-bottom: none;
+}
+.places-list a.item-link:active {
+    background: rgba(255, 255, 255, 0.1);
+}
+.places-list .item-after {
+    font-size: 41px;
+    font-weight: 100;
+    max-height: none;
+    color: #fff;
+}
+.places-list .city {
+    font-size: 25px;
+    font-weight: 300;
+    position: relative;
+    overflow: hidden;
+    max-width: 100%;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.places-list .country {
+    font-size: 14px;
+    font-weight: 300;
+}
+.places-list .swipeout-content {
+    background: none;
+}
+.places-list .swipeout-actions {
+    opacity: 0;
+    -webkit-transition-duration: 300ms;
+    -moz-transition-duration: 300ms;
+    -ms-transition-duration: 300ms;
+    -o-transition-duration: 300ms;
+    transition-duration: 300ms;
+}
+.places-list .swipeout-opened .swipeout-actions {
+    opacity: 1;
+}
+.places-list .list-block-label {
+    text-align: center;
+    color: #fff;
+    opacity: 0.6;
+}*/
+
+/*==============================
+    Search popup styling
+==============================*/
+
+/*.popup {
+    background: rgba(25, 18, 15, 0.55);
+    color: #fff;
+}
+.popup .navbar {
+    background: #1c1d21;
+}
+.popup .navbar .left {
+    width: 100%;
+    -webkit-box-flex: 1;
+    -webkit-flex-shrink: 1;
+    -ms-flex-shrink: 1;
+    flex-shrink: 1;
+    margin-right: 0;
+}
+.popup .preloader {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    margin-top: -10px;
+    height: 20px;
+    width: 20px;
+    display: none;
+}
+.popup input[type="text"] {
+    height: 28px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    color: #fff;
+    padding: 4px 40px 4px 10px;
+    display: block;
+    width: 100%;
+    margin: 0;
+    border: none;
+    border-radius: 5px;
+    background: #000;
+    -webkit-appearance: none;
+    appearance: none;
+    font-family: inherit;
+    font-size: 14px;
+}
+.popup .pages,
+.popup .page {
+    background: none;
+}
+.popup a.link {
+    color: #fff;
+}
+.popup .search-results {
+    list-style: none;
+    margin: 0 0;
+    padding: 0 20px 0 18px;
+    font-size: 16px;
+}
+.popup .search-results li {
+    margin: 10px 0;
+    cursor: pointer;
+    white-space: nowrap;
+    max-width: 100%;
+    position: relative;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.popup .search-results span {
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.8);
+    font-weight: 300;
+    margin-left: 5px;
+}*/
+
+/*==============================
+    Details page styles
+==============================*/
+
+/*.page[data-page="detail"] {
+    color: #fff;
+}
+.detail-city {
+    margin-top: 20px;
+    font-size: 31px;
+    text-align: center;
+    font-weight: 300;
+}
+.detail-condition {
+    text-align: center;
+}
+.detail-temp {
+    font-size: 81px;
+    line-height: 81px;
+    font-weight: 100;
+    text-align: center;
+}
+.list-block.forecast-list {
+    font-weight: 300;
+}
+@media all and (min-width: 600px) {
+    .list-block.forecast-list {
+        width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+.list-block.forecast-list ul {
+    border: none;
+    background: rgba(0, 0, 0, 0.2);
+}
+.list-block.forecast-list .item-inner {
+    border-bottom-color: rgba(0, 0, 0, 0.3);
+}
+.list-block.forecast-list li:last-child .item-inner {
+    border-bottom: none;
+}
+.list-block.forecast-list span {
+    display: inline-block;
+}
+.list-block.forecast-list span.state {
+    color: #fff;
+    font-size: 14px;
+}
+.list-block.forecast-list span.temps {
+    width: 70px;
+    margin-left: 15px;
+    display: inline-block;
+    text-align: right;
+}
+.list-block.forecast-list span.temps span {
+    width: 30px;
+}
+.list-block.forecast-list span.temps span.high {
+    color: #fff;
+}*/
+
+/*==============================
+    Registro
+==============================*/
+
+.page[data-page=registro] .ks-demo-slider .slider-slide {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+    /*background:#fff;*/
+}
+.page[data-page=registro] .ks-demo-slider .slider-slide > div {
+    width: inherit;
+}
+.page[data-page=registro] .slider-pagination-active {
+    background: #53B021;
+}
+.page[data-page=registro] h1 {
+    text-indent: -9999px;
+    width: 240px;
+    height: 334px;
+    background-image: url(../img/registro.png);
+    background-size: 100% auto;
+    background-repeat: no-repeat;
+    margin: 0 auto;
+}
+.page[data-page=registro] h1,
+.page[data-page=registro] h2 {
+    text-align: center;
+}
+.page[data-page=registro] h2 {
+    font-size: 25px;
+    font-weight: 300;
+}
+.page[data-page=registro] .list-block input[type=number] {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -ms-appearance: none;
+    appearance: none;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    border: none;
+    background: 0 0;
+    border-radius: 0;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    display: block;
+    padding: 0 0 0 5px;
+    margin: 0;
+    width: 100%;
+    height: 43px;
+    color: #000;
+    font-size: 17px;
+    font-family: inherit;
+}
+.page[data-page=registro] .IMC {
+    text-align: center;
+}
+.page[data-page=registro] .icon {
+    width: 29px;
+    height: 29px;
+    border-radius: 20%;
+    background-color: #21340C;
+}
+.page[data-page=registro] .icon.nombre {
+    background-image: url(../img/nombre.png);
+}
+.page[data-page=registro] .icon.sexo {
+    background-image: url(../img/sexo.png);
+}
+.page[data-page=registro] .icon.fechaNacimiento {
+    background-image: url(../img/fechaNacimiento.png);
+}
+.page[data-page=registro] .icon.peso {
+    background-image: url(../img/peso.png);
+}
+.page[data-page=registro] .icon.altura {
+    background-image: url(../img/altura.png);
+}
+.page[data-page=registro] .icon.actividad {
+    background-image: url(../img/actividad.png);
+}
+.page[data-page=registro] .icon.saludable {
+    background-color: #00CD0F;
+}
+.page[data-page=registro] .icon.delgado {
+    background-color: #C2CD00;
+}
+.page[data-page=registro] .icon.sobrepeso {
+    background-color: #CD6300;
+}
+.page[data-page=registro] .icon.obeso {
+    background-color: #CD0011;
+}
+.page[data-page=registro] .icon.morbido {
+    background-color: #B000CD;
+}
+.page[data-page=registro] .button.active {
+    background: #21340C;
+    color: #FDE69F;
+    border: 1px solid #21340C;
+}
+/*==============================
+    Home
+==============================*/
+
+.page[data-page=home] .center {
+    text-align: center;
+}
+.page[data-page=home] .circulo {
+    background-color: #21340C;
+    border-radius: 50%;
+    margin: 0 0 15px 15px;
+    color: #FDE69F;
+    float: left;
+}
+.page[data-page=home] .circulo a {
+    color: inherit;
+    display: block;
+    font-weight: bold;
+    text-align: center;
+}
+.page[data-page=home] .peso a {
+    /*margin: 17% 0;*/
+}
+.page[data-page=home] .IMC a,
+.page[data-page=home] .pesoIdeal a,
+.page[data-page=home] .pesoObjetivo a,
+.page[data-page=home] .caloriasDiariasNecesarias a {
+    /*margin: 32% 0;*/
+}
+.page[data-page=home] .peso {
+    height: 137.5px;
+    width: 137.5px;
+    font-size: 74px;
+}
+.page[data-page=home] .IMC,
+.page[data-page=home] .pesoIdeal,
+.page[data-page=home] .pesoObjetivo,
+.page[data-page=home] .caloriasDiariasNecesarias {
+    height: 50px;
+    width: 50px;
+    font-size: 15px;
+}
+.page[data-page=home] .IMC.saludable {
+    background-color: #53B021;
+    -webkit-animation: saludable 2s;
+    animation: saludable 2s;
+}
+@-webkit-keyframes saludable {
+    from {
+        background-color: #21340C;
+    }
+    to {
+        background-color: #53B021;
+    }
+}
+@keyframes saludable {
+    from {
+        background-color: #21340C;
+    }
+    to {
+        background-color: #53B021;
+    }
+}
+.page[data-page=home] .IMC.delgado {
+    background-color: #C2CD00;
+    -webkit-animation: delgado 2s;
+    animation: delgado 2s;
+}
+@-webkit-keyframes delgado {
+    from {
+        background-color: #21340C;
+    }
+    to {
+        background-color: #C2CD00;
+    }
+}
+@keyframes delgado {
+    from {
+        background-color: #21340C;
+    }
+    to {
+        background-color: #C2CD00;
+    }
+}
+.page[data-page=home] .IMC.sobrepeso {
+    background-color: #CD6300;
+    -webkit-animation: sobrepeso 2s;
+    animation: sobrepeso 2s;
+}
+@-webkit-keyframes sobrepeso {
+    from {
+        background-color: #21340C;
+    }
+    to {
+        background-color: #CD6300;
+    }
+}
+@keyframes sobrepeso {
+    from {
+        background-color: #21340C;
+    }
+    to {
+        background-color: #CD6300;
+    }
+}
+.page[data-page=home] .IMC.obeso {
+    background-color: #CD0011;
+    -webkit-animation: obeso 2s;
+    animation: obeso 2s;
+}
+@-webkit-keyframes obeso {
+    from {
+        background-color: #21340C;
+    }
+    to {
+        background-color: #CD0011;
+    }
+}
+@keyframes obeso {
+    from {
+        background-color: #21340C;
+    }
+    to {
+        background-color: #CD0011;
+    }
+}
+.page[data-page=home] .IMC.morbido {
+    background-color: #B000CD;
+    -webkit-animation: morbido 2s;
+    animation: morbido 2s;
+}
+@-webkit-keyframes morbido {
+    from {
+        background-color: #21340C;
+    }
+    to {
+        background-color: #B000CD;
+    }
+}
+@keyframes morbido {
+    from {
+        background-color: #21340C;
+    }
+    to {
+        background-color: #B000CD;
+    }
+}
+.page[data-page=home] .circulo div {
+    position: relative;
+    font-size: 30%;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+.page[data-page=home] .circulo div span {
+    display: inline-block;
+    -webkit-transition: all 300ms linear;
+    transition: all 300ms linear;
+}
+.page[data-page=home] .circulo.peso .char1 {
+    -webkit-transform: translateX(0px) translateY(8px) rotate(-30deg);
+}
+.page[data-page=home] .circulo.peso .char2 {
+    -webkit-transform: translateX(-1px) translateY(0px) rotate(-15deg);
+}
+.page[data-page=home] .circulo.peso .char3 {
+    -webkit-transform: translateX(1px) translateY(0px) rotate(15deg);
+}
+.page[data-page=home] .circulo.peso .char4 {
+    -webkit-transform: translateX(0px) translateY(8px) rotate(30deg);
+}
+.page[data-page=home] .content-block-title {
+    clear: both;
+}
+.page[data-page=home] canvas {
+    width: 100% !important;
+    max-width: 800px;
+    height: auto !important;
+}
+.page[data-page=home] .prueba {
+    border-radius: 50%;
+    border: 1px solid #21340C;
+    width: 82px;
+    height: 82px;
+    float: left;
+    margin: 6.5px
+}
+.page[data-page=home] .prueba .numero,
+.page[data-page=home] .prueba .texto {
+    text-align: center;
+}
+.page[data-page=home] .prueba .numero {
+    font-weight: bold;
+    font-size: 20px;
+    margin-top: calc((100% - 20px*2) / 2);
+}
+.page[data-page=home] .prueba .texto {
+    font-size: 12px;
+}
+/*==============================
+    Pesos
+==============================*/
+
+.page[data-page=pesos] .icon {
+    width: 29px;
+    height: 29px;
+    border-radius: 20%;
+}
+.page[data-page=pesos] .list-block .swipeout-content {
+    background: #FDE69F;
+}
+/*==============================
+    Styles for case with statusbar overlay
+==============================*/
+
+html.with-statusbar-overlay .statusbar-overlay {
+    background: #21340C;
+}
+html.with-statusbar-overlay .statusbar-overlay.with-popup-opened {
+    z-index: 11000;
+    background: #1c1d21;
+}
+@media all and (max-width: 630px) and (max-height: 630px) {
+    html.with-statusbar-overlay .popup {
+        top: 20px;
+        height: -webkit-calc(100% - 20px);
+        height: -moz-calc(100% - 20px);
+        height: -ms-calc(100% - 20px);
+        height: calc(100% - 20px);
+    }
+}
+/*==============================
+    Modal
+==============================*/
+
+.modal-title {
+    background-image: url(../img/modal-title.png);
+    text-indent: -9999px;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+.modal-inner {
+    border-bottom: 1px solid #FDE7A0;
+}
+.modal-button {
+    border-right: 1px solid #FDE7A0;
+}
+.modal-inner,
+.modal-button {
+    color: #FDE7A0;
+    background: rgba(33, 52, 12, 0.9);
+}
+.modal-button:active {
+    /*background: #68095b;*/
+}
+/*==============================
+    Tabbar
+==============================*/
+
+.tabbar {
+    background: #21340C;
+    color: #fff;
+    border-top: #21340C;
+}
+.tabbar a {
+    color: #FDE7A0;
+}
+.tabbar a.active {
+    color: #53B021;
+}
+/*
+    Fuentes
+*/
+
+@font-face {
+    font-family: 'Helvetica Neue';
+    src: local("Helvetica Neue Light"), local("HelveticaNeue-Light"), url("/fonts/HelveticaNeue-Light.ttf") format("truetype"), url("/fonts/HelveticaNeue-Light.woff") format("woff");
+    font-weight: 300;
+}
+@font-face {
+    font-family: 'Helvetica Neue';
+    src: local("Helvetica Neue Medium"), local("HelveticaNeue-Medium"), url("/fonts/HelveticaNeue-Medium.ttf") format("truetype"), url("/fonts/HelveticaNeue-Medium.woff") format("woff");
+    font-weight: 500;
+}
+@font-face {
+    font-family: 'Helvetica Neue XP';
+    src: url("/fonts/HelveticaNeue-Light.svg#HelveticaNeue-Light") format("svg"), url("/fonts/HelveticaNeue-Light.woff") format("woff");
+    font-weight: 300;
+}
+@font-face {
+    font-family: 'Helvetica Neue XP';
+    src: url("/fonts/HelveticaNeue-Medium.svg#HelveticaNeue-Medium") format("svg"), url("/fonts/HelveticaNeue-Medium.woff") format("woff");
+    font-weight: 500;
+}
+html {
+    -ms-content-zooming: none;
+}
+body {
+    margin: 0px;
+    padding: 0px;
+    -webkit-font-smoothing: antialiased;
+    font-family: "Helvetica Neue", sans-serif;
+    font-weight: 300;
+    font-size: 15px;
+    line-height: 1.2;
+    -ms-content-zooming: none;
+}
+body textarea,
+body input {
+    font-family: "Helvetica Neue", sans-serif;
+}
+b,
+strong,
+.font-medium {
+    font-weight: 500;
+}
+.subtitle {
+    font-size: 60%;
+    vertical-align: middle;
+}
+/*
+    Fondos
+*/
+
+/*[data-page=index] > .page-content {
+    background-image: url(../img/fondo1.png);
+}
+
+[data-page=imc] > .page-content {
+    background-image: url(../img/fondo2.png);
+}
+
+[data-page=dietas] > .page-content {
+    background-image: url(../img/fondo3.png);
+}
+
+[data-page=videos] > .page-content {
+    background-image: url(../img/fondo4.png);
+}
+
+[data-page=configuracion] > .page-content {
+    background-image: url(../img/fondo5.png);
+}*/
+
+/*
+    Iconos
+*/
+
+i.tabbar-home-icon {
+    width: 30px;
+    height: 30px;
+    background-image: url(../img/tabbar-home-icon.png);
+}
+.active i.tabbar-home-icon {
+    background-image: url(../img/tabbar-active-home-icon.png);
+}
+i.tabbar-food-icon {
+    width: 30px;
+    height: 30px;
+    background-image: url(../img/tabbar-food-icon.png);
+}
+.active i.tabbar-food-icon {
+    background-image: url(../img/tabbar-active-food-icon.png);
+}
+i.tabbar-exercise-icon {
+    width: 30px;
+    height: 30px;
+    background-image: url(../img/tabbar-exercise-icon.png);
+}
+.active i.tabbar-exercise-icon {
+    background-image: url(../img/tabbar-active-exercise-icon.png);
+}
+i.tabbar-video-icon {
+    width: 30px;
+    height: 30px;
+    background-image: url(../img/tabbar-video-icon.png);
+}
+.active i.tabbar-video-icon {
+    background-image: url(../img/tabbar-active-video-icon.png);
+}
+i.icon.icon-imc {
+    width: 29px;
+    height: 29px;
+    background-image: url(../img/i-imc.png);
+}
+i.icon.icon-dietas {
+    width: 29px;
+    height: 29px;
+    background-image: url(../img/i-dietas.png);
+}
+i.icon.icon-videos {
+    width: 29px;
+    height: 29px;
+    background-image: url(../img/i-videos.png);
+}
+i.icon.icon-configuracion {
+    width: 29px;
+    height: 29px;
+    background-image: url(../img/i-configuracion.png);
+}
+i.icon.icon-form-peso {
+    width: 29px;
+    height: 29px;
+    background-image: url(../img/i-form-peso.png);
+}
+i.icon.icon-form-altura {
+    width: 29px;
+    height: 29px;
+    background-image: url(../img/i-form-altura.png);
+}
+i.icon.icon-form-actividad {
+    width: 29px;
+    height: 29px;
+    background-image: url(../img/i-form-actividad.png);
+}
+i.icon.icon-saludable {
+    width: 29px;
+    height: 29px;
+    background-image: url(../img/i-saludable.png);
+}
+i.icon.icon-delgado {
+    width: 29px;
+    height: 29px;
+    background-image: url(../img/i-delgado.png);
+}
+i.icon.icon-sobrepeso {
+    width: 29px;
+    height: 29px;
+    background-image: url(../img/i-sobrepeso.png);
+}
+i.icon.icon-obeso {
+    width: 29px;
+    height: 29px;
+    background-image: url(../img/i-obeso.png);
+}
+i.icon.icon-morbido {
+    width: 29px;
+    height: 29px;
+    background-image: url(../img/i-morbido.png);
+}
+i.icon.icon-leche {
+    width: 29px;
+    height: 29px;
+    background-image: url(../img/i-leche.png);
+}
+i.icon.icon-pan {
+    width: 29px;
+    height: 29px;
+    background-image: url(../img/i-pan.png);
+}
+i.icon.icon-fruta {
+    width: 29px;
+    height: 29px;
+    background-image: url(../img/i-fruta.png);
+}
+i.icon.icon-verdura {
+    width: 29px;
+    height: 29px;
+    background-image: url(../img/i-verdura.png);
+}
+i.icon.icon-pasta {
+    width: 29px;
+    height: 29px;
+    background-image: url(../img/i-pasta.png);
+}
+i.icon.icon-carne {
+    width: 29px;
+    height: 29px;
+    background-image: url(../img/i-carne.png);
+}
+i.icon.icon-pescado {
+    width: 29px;
+    height: 29px;
+    background-image: url(../img/i-pescado.png);
+}
+/*
+    IMC
+*/
+
+.saludable,
+.icon.saludable {
+    background-color: #00CD0F;
+}
+.delgado {
+    background-color: #C2CD00;
+}
+.sobrepeso {
+    background-color: #CD6300;
+}
+.obeso {
+    background-color: #CD0011;
+}
+.morbido {
+    background-color: #B000CD;
+}
+[data-page=imc] .imc {
+    text-align: center;
+    /*color: #FFF;*/
+    margin: 0;
+    /*font-family: monospace;*/
+    /*background-color: #808080;*/
+}
+/*
+    TMB
+*/
+
+[data-page=tmb] .tmb {
+    text-align: center;
+    /*color: #FFF;*/
+    margin: 0;
+    /*font-family: monospace;*/
+    /*background-color: #808080;*/
+}
+[data-page=tmb] .calorias-recomendadas {
+    text-align: center;
+    /*color: #FFF;*/
+    margin: 0;
+    /*font-family: monospace;*/
+    /*background-color: #808080;*/
+}
