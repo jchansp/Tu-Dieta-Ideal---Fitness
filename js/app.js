@@ -376,6 +376,16 @@ window.onload = function () {
                 var IMC = (myApp.formGetData('Usuario').peso / Math.pow(myApp.formGetData('Usuario').altura, 2)).toFixed(2);
                 $$('.IMC').html(IMC);
                 if (IMC < 18.5)
+                    clase = 'delgado';
+                if (IMC >= 18.5 && IMC <= 25)
+                    clase = 'saludable';
+                if (IMC > 25 && IMC <= 30)
+                    clase = 'sobrepeso';
+                if (IMC > 30 && IMC <= 40)
+                    clase = 'obeso';
+                if (IMC > 40)
+                    clase = 'morbido';
+                /*if (IMC < 18.5)
                     $$('.IMC').addClass('delgado');
                 if (IMC >= 18.5 && IMC < 25)
                     $$('.IMC').addClass('saludable');
@@ -384,7 +394,7 @@ window.onload = function () {
                 if (IMC >= 30 && IMC < 40)
                     $$('.IMC').addClass('obeso');
                 if (IMC >= 40)
-                    $$('.IMC').addClass('morbido');
+                    $$('.IMC').addClass('morbido');*/
             }
         };
     }
@@ -455,6 +465,8 @@ myApp.$(window).on('load', function () {
         $$('[data-page=home] .caloriasDiariasNecesarias a').html(Usuario.caloriasDiariasNecesarias);
     refreshChart();
 }*/
+    $$('.IMC .numero').html(myApp.IMC);
+    $$('.IMC').addClass(myApp.rangoIMC);
 })
 myApp.$(window).on('orientationchange', function () {
     if ($$('[data-page=home]')) {
@@ -469,3 +481,38 @@ window.onstorage = function (event) {
     //localStorage.removeItem(url);
     console.log(event.key);
 };
+
+Object.defineProperty(myApp, "altura", {
+    get: function () {
+        return parseFloat(parseFloat(myApp.formGetData('Usuario').altura).toFixed(2))
+    }
+});
+Object.defineProperty(myApp, "IMC", {
+    get: function () {
+        return parseFloat((this.peso / Math.pow(this.altura, 2)).toFixed(2));
+    }
+});
+Object.defineProperty(myApp, "peso", {
+    get: function () {
+        return parseFloat(parseFloat(myApp.formGetData('Usuario').peso).toFixed(2))
+    }
+});
+Object.defineProperty(myApp, "pesoIdeal", {
+    get: function () {
+        return parseFloat((21.75 * Math.pow(this.altura, 2)).toFixed(2));
+    }
+});
+Object.defineProperty(myApp, "rangoIMC", {
+    get: function () {
+        if (this.IMC < 18.5)
+            return 'delgado';
+        if (this.IMC >= 18.5 && this.IMC < 25)
+            return 'saludable';
+        if (this.IMC >= 25 && this.IMC < 30)
+            return 'sobrepeso';
+        if (this.IMC >= 30 && this.IMC < 40)
+            return 'obeso';
+        if (this.IMC >= 40)
+            return 'morbido';
+    }
+});
