@@ -364,40 +364,6 @@ window.onload = function () {
     //        myApp.alert('Perfecto, esta semana pesas ' + data + ' kg.');
     //    });
     //};
-    if (!myApp.formGetData('Usuario')) {
-        myApp.popup($$('.popup'));
-        myApp.slider('.slider-container', {
-            pagination: '.slider-pagination'
-        }).onSlideChangeEnd = function () {
-            if (this.activeSlideIndex > 1 && !myApp.formGetData('Usuario')) {
-                this.slideTo(1, 300);
-                this.updateSlides();
-            } else {
-                var IMC = (myApp.formGetData('Usuario').peso / Math.pow(myApp.formGetData('Usuario').altura, 2)).toFixed(2);
-                $$('.IMC').html(IMC);
-                if (IMC < 18.5)
-                    clase = 'delgado';
-                if (IMC >= 18.5 && IMC <= 25)
-                    clase = 'saludable';
-                if (IMC > 25 && IMC <= 30)
-                    clase = 'sobrepeso';
-                if (IMC > 30 && IMC <= 40)
-                    clase = 'obeso';
-                if (IMC > 40)
-                    clase = 'morbido';
-                /*if (IMC < 18.5)
-                    $$('.IMC').addClass('delgado');
-                if (IMC >= 18.5 && IMC < 25)
-                    $$('.IMC').addClass('saludable');
-                if (IMC >= 25 && IMC < 30)
-                    $$('.IMC').addClass('sobrepeso');
-                if (IMC >= 30 && IMC < 40)
-                    $$('.IMC').addClass('obeso');
-                if (IMC >= 40)
-                    $$('.IMC').addClass('morbido');*/
-            }
-        };
-    }
 };
 
 function refreshChart() {
@@ -465,9 +431,28 @@ myApp.$(window).on('load', function () {
         $$('[data-page=home] .caloriasDiariasNecesarias a').html(Usuario.caloriasDiariasNecesarias);
     refreshChart();
 }*/
-    $$('.IMC .numero').html(myApp.IMC);
-    $$('.IMC').addClass(myApp.rangoIMC);
-})
+    if (myApp.formGetData('Usuario')) {
+        myApp.popup($$('.popup'));
+        myApp.slider('.slider-container', {
+            pagination: '.slider-pagination'
+        }).onSlideChangeEnd = function () {
+            if (this.activeSlideIndex > 1 && !myApp.formGetData('Usuario')) {
+                this.slideTo(1, 300);
+                this.updateSlides();
+            } else {
+                $$('.peso .numero').html(myApp.peso);
+                $$('.IMC .numero').html(myApp.IMC);
+                $$('.IMC').addClass(myApp.rangoIMC);
+                $$('.pesoIdeal .numero').html(myApp.pesoIdeal);
+            }
+        };
+    } else {
+        $$('.peso .numero').html(myApp.peso);
+        $$('.IMC .numero').html(myApp.IMC);
+        $$('.IMC').addClass(myApp.rangoIMC);
+        $$('.pesoIdeal .numero').html(myApp.pesoIdeal);
+    }
+});
 myApp.$(window).on('orientationchange', function () {
     if ($$('[data-page=home]')) {
         refreshChart();

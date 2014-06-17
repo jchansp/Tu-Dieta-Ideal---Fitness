@@ -397,8 +397,40 @@ i.icon-plus {
     font-size: 17px;
     font-family: inherit;
 }
-.page[data-page=registro] .IMC {
+.page[data-page=registro] div[class*="col-"] {
+    border-radius: 50%;
+    display: inline-block;
+    position: relative;
+    background-color: #21340C;
+    color: #FDE69F;
+    visibility: hidden;
+}
+.page[data-page=registro] div[class*="col-"].IMC {
+    visibility: inherit;
+}
+.page[data-page=registro] div[class*="col-"] div:first-child {
+    margin-top: 100%;
+}
+.page[data-page=registro] div[class*="col-"] .numero,
+.page[data-page=registro] div[class*="col-"] .texto {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
     text-align: center;
+}
+.page[data-page=registro] div[class*="col-"] .numero {
+    font-weight: bold;
+    font-size: 20px;
+    font-size: 6.2vw;
+    margin-top: 25%;
+}
+.page[data-page=registro] div[class*="col-"] .texto {
+    font-size: 12px;
+    font-size: 3.9vw;
+    margin-top: 60%;
 }
 .page[data-page=registro] .icon {
     width: 29px;
@@ -424,18 +456,23 @@ i.icon-plus {
 .page[data-page=registro] .icon.actividad {
     background-image: url(../img/actividad.png);
 }
+.page[data-page=registro] .IMC.saludable,
 .page[data-page=registro] .icon.saludable {
     background-color: #00CD0F;
 }
+.page[data-page=registro] .IMC.delgado,
 .page[data-page=registro] .icon.delgado {
     background-color: #C2CD00;
 }
+.page[data-page=registro] .IMC.sobrepeso,
 .page[data-page=registro] .icon.sobrepeso {
     background-color: #CD6300;
 }
+.page[data-page=registro] .IMC.obeso,
 .page[data-page=registro] .icon.obeso {
     background-color: #CD0011;
 }
+.page[data-page=registro] .IMC.morbido,
 .page[data-page=registro] .icon.morbido {
     background-color: #B000CD;
 }
@@ -450,7 +487,7 @@ i.icon-plus {
 
 .page[data-page=home] div[class*="col-"] {
     border-radius: 50%;
-    border: 1px solid #21340C;
+    /*border: 1px solid #21340C;*/
     display: inline-block;
     position: relative;
     background-color: #21340C;
