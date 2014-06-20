@@ -1,0 +1,15 @@
+/*==============================
+    Tabbar
+==============================*/
+
+.tabbar {
+    background: #21340C;
+    color: #fff;
+    border-top: #21340C;
+}
+.tabbar a {
+    color: #FDE7A0;
+}
+.tabbar a.active {
+    color: #53B021;
+}

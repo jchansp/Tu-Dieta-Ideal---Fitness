@@ -1,0 +1,37 @@
+/*==============================
+    Navbar
+==============================*/
+
+.navbar {
+    border-bottom: none;
+    background: #21340C;
+    color: #FDE7A0;
+}
+i.icon.icon-bars-blue {
+    background-image: url("data:image/svg+xml;charset=utf-8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 42 26' fill='%2353B021'><rect width='4' height='4'/><rect x='8' y='1' width='34' height='2'/><rect y='11' width='4' height='4'/><rect x='8' y='12' width='34' height='2'/><rect y='22' width='4' height='4'/><rect x='8' y='23' width='34' height='2'/></svg>");
+}
+i.icon.icon-back-blue {
+    background-image: url("data:image/svg+xml;charset=utf-8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 20' fill='%2353B021'><path d='M10,0l2,2l-8,8l8,8l-2,2L0,10L10,0z'/></svg>");
+}
+.navbar a.link,
+.toolbar a.link {
+    color: #53B021;
+}
+span.navbar-logo {
+    width: 104px;
+    height: 25px;
+    background: url(../img/logo.png) no-repeat center;
+    -webkit-background-size: 100% auto;
+    background-size: 100% auto;
+    display: block;
+}
+i.icon-plus {
+    /*color:#fff;*/
+    border-radius: 100%;
+    width: 25px;
+    height: 25px;
+    font-size: 31px;
+    line-height: 20px;
+    text-align: center;
+    font-weight: 100;
+}

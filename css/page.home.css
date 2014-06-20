@@ -1,0 +1,146 @@
+/*==============================
+    Home
+==============================*/
+
+.page[data-page=home] div[class*="col-"] {
+    border-radius: 50%;
+    display: inline-block;
+    position: relative;
+    background-color: #21340C;
+    color: #FDE69F;
+}
+.page[data-page=home] div[class*="col-"] div:first-child {
+    margin-top: 100%;
+}
+.page[data-page=home] div[class*="col-"] .numero,
+.page[data-page=home] div[class*="col-"] .texto {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    text-align: center;
+}
+.page[data-page=home] div[class*="col-"] .numero {
+    font-weight: bold;
+    font-size: 20px;
+    font-size: 6.2vw;
+    margin-top: 25%;
+    color: inherit;
+}
+.page[data-page=home] div[class*="col-"] .texto {
+    font-size: 12px;
+    font-size: 3.9vw;
+    margin-top: 60%;
+}
+.page[data-page=home] .IMC.saludable {
+    background-color: #53B021;
+    -webkit-animation: saludable 2s;
+    animation: saludable 2s;
+}
+@-webkit-keyframes saludable {
+    from {
+        background-color: #21340C;
+    }
+    to {
+        background-color: #53B021;
+    }
+}
+@keyframes saludable {
+    from {
+        background-color: #21340C;
+    }
+    to {
+        background-color: #53B021;
+    }
+}
+.page[data-page=home] .IMC.delgado {
+    background-color: #C2CD00;
+    -webkit-animation: delgado 2s;
+    animation: delgado 2s;
+}
+@-webkit-keyframes delgado {
+    from {
+        background-color: #21340C;
+    }
+    to {
+        background-color: #C2CD00;
+    }
+}
+@keyframes delgado {
+    from {
+        background-color: #21340C;
+    }
+    to {
+        background-color: #C2CD00;
+    }
+}
+.page[data-page=home] .IMC.sobrepeso {
+    background-color: #CD6300;
+    -webkit-animation: sobrepeso 2s;
+    animation: sobrepeso 2s;
+}
+@-webkit-keyframes sobrepeso {
+    from {
+        background-color: #21340C;
+    }
+    to {
+        background-color: #CD6300;
+    }
+}
+@keyframes sobrepeso {
+    from {
+        background-color: #21340C;
+    }
+    to {
+        background-color: #CD6300;
+    }
+}
+.page[data-page=home] .IMC.obeso {
+    background-color: #CD0011;
+    -webkit-animation: obeso 2s;
+    animation: obeso 2s;
+}
+@-webkit-keyframes obeso {
+    from {
+        background-color: #21340C;
+    }
+    to {
+        background-color: #CD0011;
+    }
+}
+@keyframes obeso {
+    from {
+        background-color: #21340C;
+    }
+    to {
+        background-color: #CD0011;
+    }
+}
+.page[data-page=home] .IMC.morbido {
+    background-color: #B000CD;
+    -webkit-animation: morbido 2s;
+    animation: morbido 2s;
+}
+@-webkit-keyframes morbido {
+    from {
+        background-color: #21340C;
+    }
+    to {
+        background-color: #B000CD;
+    }
+}
+@keyframes morbido {
+    from {
+        background-color: #21340C;
+    }
+    to {
+        background-color: #B000CD;
+    }
+}
+.page[data-page=home] canvas {
+    width: 100% !important;
+    max-width: 800px;
+    height: auto !important;
+}

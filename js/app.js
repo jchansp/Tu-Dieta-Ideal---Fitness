@@ -85,10 +85,10 @@ var view4 = myApp.addView('#view-4', {
 
 $$(document).on('pageInit', function (e) {
     var page = e.detail.page;
-    console.log(page);
-    if (page.name === 'home') {
+
+    /*if (page.name === 'home') {
         myApp.alert('home');
-    }
+    }*/
 
     if (page.name === 'configuracion') {
         if (Usuario.nombre)
@@ -151,6 +151,7 @@ $$(document).on('pageInit', function (e) {
                 return;
             }
             var dietas = JSON.parse(data);
+            console.log(dietas);
             var dieta = dietas[0];
             $$('.navbar .center').html('Dieta ' + dieta.calorias + ' Kcal.');
             $$('[data-page=dietas] .page-content').html('');
@@ -282,89 +283,7 @@ $$(document).on('pageInit', function (e) {
             $$('[data-page=tmb] h2.calorias-recomendadas').html(Usuario.caloriasDiariasNecesarias.toFixed(0));
         }
     };
-
-    if (page.name === 'pesos') {
-        if (Usuario.semanas && Usuario.pesos && Usuario.altura) {
-            Usuario.semanas.forEach(function (semana, i) {
-                var fecha = [(semana.getDate() < 10) ? '0' + semana.getDate() : semana.getDate(),
-                    ((semana.getMonth() + 1) < 10) ? '0' + (semana.getMonth() + 1) : (semana.getMonth() + 1),
-                semana.getFullYear() - 2000].join('/')
-                var peso = Usuario.pesos[i] || '(vacío)';
-                var IMC = (peso / Math.pow(Usuario.altura, 2));
-                var clase;
-                if (IMC < 18.5)
-                    clase = 'delgado';
-                if (IMC >= 18.5 && IMC <= 25)
-                    clase = 'saludable';
-                if (IMC > 25 && IMC <= 30)
-                    clase = 'sobrepeso';
-                if (IMC > 30 && IMC <= 40)
-                    clase = 'obeso';
-                if (IMC > 40)
-                    clase = 'morbido';
-                $$('[data-page=pesos] .list-block ul')[0].innerHTML +=
-                //'<li class="swipeout">' +
-                '<li>' +
-                //'    <div class="item-content swipeout-content">' +
-                '    <div class="item-content">' +
-                    '        <div class="item-media"><i class="icon ' + clase + '"></i></div>' +
-                    '        <div class="item-inner">' +
-                    '            <div class="item-title">' + peso + '</div>' +
-                    '            <div class="item-after">' + fecha + '</div>' +
-                    '        </div>' +
-                    '    </div>' +
-                //'    <div class="swipeout-actions">' +
-                //'        <div class="swipeout-actions-inner"><a href="#" data-confirm="¿Seguro que quiere borrar este peso?" class="swipeout-delete">Borrar</a></div>' +
-                //'    </div>' +
-                '</li>';
-            });
-            //if (Usuario.nombre && !Usuario.seHaPesadoEstaSemana) {
-            //    myApp.prompt('Hola ' + Usuario.nombre + ' ¿Cuánto pesas esta semana?', function (data) {
-            //        Usuario.peso = data;
-            //        myApp.alert('Perfecto, esta semana pesas ' + data + ' kg.');
-            //    });
-            //};
-            //var semanas = Usuario.semanas.splice(Usuario.semanas.length - 4, Usuario.semanas.length - 1);
-            //semanas.forEach(function (semana, i) { semanas[i] = semana.toLocaleDateString() });
-            //new Chart(document.getElementById("canvas").getContext("2d")).Line({
-            //    labels: semanas,
-            //    datasets:
-            //        [
-            //		    {
-            //		        fillColor: "rgba(255,0,0,0.5)",
-            //		        strokeColor: "rgba(255,0,0,1)",
-            //		        pointColor: "rgba(255,0,0,1)",
-            //		        pointStrokeColor: "#fff",
-            //		        data: Usuario.pesos.splice(Usuario.pesos.length - 4, Usuario.pesos.length - 1)
-            //		    },
-            //            {
-            //                fillColor: "rgba(0,0,255,0.5)",
-            //                strokeColor: "rgba(0,0,255,1)",
-            //                pointColor: "rgba(0,0,255,1)",
-            //                pointStrokeColor: "#fff",
-            //                data: [80, 78, 78, 78]
-            //            }
-            //        ]
-            //},
-            //{
-            //    //datasetFill: false,
-            //    scaleOverride: true,
-            //    scaleSteps: 10,
-            //    scaleStepWidth: ((Usuario.pesoMaximoUltimoMes * 1.05 - Usuario.pesoMinimoUltimoMes * 0.95) / 10).toFixed(2),
-            //    scaleStartValue: Usuario.pesoMinimoUltimoMes * 0.95,
-            //});
-        }
-    };
 });
-
-window.onload = function () {
-    //if (Usuario.nombre && !Usuario.seHaPesadoEstaSemana) {
-    //    myApp.prompt('Hola ' + Usuario.nombre + ' ¿Cuánto pesas esta semana?', function (data) {
-    //        Usuario.peso = data;
-    //        myApp.alert('Perfecto, esta semana pesas ' + data + ' kg.');
-    //    });
-    //};
-};
 
 function refreshChart() {
     $$('#canvas').html('');
@@ -407,39 +326,26 @@ function refreshChart() {
     });
 };
 myApp.$(window).on('load', function () {
-    /*if ($$('[data-page=home]')) {
-    if (Usuario.peso)
-        $$('[data-page=home] .peso a').html(Usuario.peso);
-    if (Usuario.IMC) {
-        $$('[data-page=home] .IMC a').html(Usuario.IMC.toFixed(2));
-        if (Usuario.IMC < 18.5)
-            $$('[data-page=home] .IMC').addClass('delgado');
-        if (Usuario.IMC >= 18.5 && Usuario.IMC <= 25)
-            $$('[data-page=home] .IMC').addClass('saludable');
-        if (Usuario.IMC > 25 && Usuario.IMC <= 30)
-            $$('[data-page=home] .IMC').addClass('sobrepeso');
-        if (Usuario.IMC > 30 && Usuario.IMC <= 40)
-            $$('[data-page=home] .IMC').addClass('obeso');
-        if (Usuario.IMC > 40)
-            $$('[data-page=home] .IMC').addClass('morbido');
-    }
-    if (Usuario.pesoIdeal)
-        $$('[data-page=home] .pesoIdeal a').html(Usuario.pesoIdeal.toFixed(2));
-    if (Usuario.pesoObjetivo)
-        $$('[data-page=home] .pesoObjetivo a').html(Usuario.pesoObjetivo);
-    if (Usuario.caloriasDiariasNecesarias)
-        $$('[data-page=home] .caloriasDiariasNecesarias a').html(Usuario.caloriasDiariasNecesarias);
-    refreshChart();
-}*/
-    if (myApp.formGetData('Usuario')) {
-        myApp.popup($$('.popup'));
+    /* Aqui entra al arrancar la aplicación */
+    if (!myApp.formGetData('Usuario')) {
+        /* Si no tiene recogidos los datos del usuario */
+        myApp.popup($$('.popup.registro'));
         myApp.slider('.slider-container', {
             pagination: '.slider-pagination'
         }).onSlideChangeEnd = function () {
-            if (this.activeSlideIndex > 1 && !myApp.formGetData('Usuario')) {
-                this.slideTo(1, 300);
-                this.updateSlides();
+            /* Aquí entra cuando se pasa de página en el slider inicial */
+            if (!myApp.formGetData('Usuario')) {
+                /* Si no tiene recogidos los datos del usuario */
+                if (this.activeSlideIndex === 1) {
+                    /* Si estamos en la segunda pesataña */
+                    $$('.fechaInicio').val(JSON.stringify(myApp.fechaInicio).replace('"', '').split('T')[0]);
+                } else if (this.activeSlideIndex > 1) {
+                    /* Si estamos en alguna pesataña de la segunda en adelante */
+                    this.slideTo(1, 300);
+                    this.updateSlides();
+                }
             } else {
+                /* Si tiene datos de usuario */
                 $$('.peso .numero').html(myApp.peso);
                 $$('.IMC .numero').html(myApp.IMC);
                 $$('.IMC').addClass(myApp.rangoIMC);
@@ -447,6 +353,7 @@ myApp.$(window).on('load', function () {
             }
         };
     } else {
+        /* Si tiene datos de usuario */
         $$('.peso .numero').html(myApp.peso);
         $$('.IMC .numero').html(myApp.IMC);
         $$('.IMC').addClass(myApp.rangoIMC);
@@ -454,50 +361,8 @@ myApp.$(window).on('load', function () {
     }
 });
 myApp.$(window).on('orientationchange', function () {
+    /* Aquí entra cada vez que se gire la pantalla */
     if ($$('[data-page=home]')) {
         refreshChart();
-    }
-});
-myApp.$(window).on('storage', function (event) {
-    //localStorage.removeItem(url);
-    console.log(event.key);
-});
-window.onstorage = function (event) {
-    //localStorage.removeItem(url);
-    console.log(event.key);
-};
-
-Object.defineProperty(myApp, "altura", {
-    get: function () {
-        return parseFloat(parseFloat(myApp.formGetData('Usuario').altura).toFixed(2))
-    }
-});
-Object.defineProperty(myApp, "IMC", {
-    get: function () {
-        return parseFloat((this.peso / Math.pow(this.altura, 2)).toFixed(2));
-    }
-});
-Object.defineProperty(myApp, "peso", {
-    get: function () {
-        return parseFloat(parseFloat(myApp.formGetData('Usuario').peso).toFixed(2))
-    }
-});
-Object.defineProperty(myApp, "pesoIdeal", {
-    get: function () {
-        return parseFloat((21.75 * Math.pow(this.altura, 2)).toFixed(2));
-    }
-});
-Object.defineProperty(myApp, "rangoIMC", {
-    get: function () {
-        if (this.IMC < 18.5)
-            return 'delgado';
-        if (this.IMC >= 18.5 && this.IMC < 25)
-            return 'saludable';
-        if (this.IMC >= 25 && this.IMC < 30)
-            return 'sobrepeso';
-        if (this.IMC >= 30 && this.IMC < 40)
-            return 'obeso';
-        if (this.IMC >= 40)
-            return 'morbido';
     }
 });

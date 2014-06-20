@@ -1,0 +1,148 @@
+/*==============================
+    Registro
+==============================*/
+
+.popup.registro .ks-demo-slider .slider-slide {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+    /*background:#fff;*/
+}
+.popup.registro .ks-demo-slider .slider-slide > div {
+    width: inherit;
+}
+.popup.registro .slider-pagination-active {
+    background: #53B021;
+}
+.popup.registro h1 {
+    text-indent: -9999px;
+    width: 240px;
+    height: 334px;
+    background-image: url(../img/registro.png);
+    background-size: 100% auto;
+    background-repeat: no-repeat;
+    margin: 0 auto;
+}
+.popup.registro h1,
+.popup.registro h2 {
+    text-align: center;
+}
+.popup.registro h2 {
+    font-size: 25px;
+    font-weight: 300;
+}
+.popup.registro .list-block input[type=number] {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -ms-appearance: none;
+    appearance: none;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    border: none;
+    background: 0 0;
+    border-radius: 0;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    display: block;
+    padding: 0 0 0 5px;
+    margin: 0;
+    width: 100%;
+    height: 43px;
+    color: #000;
+    font-size: 17px;
+    font-family: inherit;
+}
+.popup.registro div[class*="col-"] {
+    border-radius: 50%;
+    display: inline-block;
+    position: relative;
+    background-color: #21340C;
+    color: #FDE69F;
+    visibility: hidden;
+}
+.popup.registro div[class*="col-"].IMC {
+    visibility: inherit;
+}
+.popup.registro div[class*="col-"] div:first-child {
+    margin-top: 100%;
+}
+.popup.registro div[class*="col-"] .numero,
+.popup.registro div[class*="col-"] .texto {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    text-align: center;
+}
+.popup.registro div[class*="col-"] .numero {
+    font-weight: bold;
+    font-size: 20px;
+    font-size: 6.2vw;
+    margin-top: 25%;
+}
+.popup.registro div[class*="col-"] .texto {
+    font-size: 12px;
+    font-size: 3.9vw;
+    margin-top: 60%;
+}
+.popup.registro .icon {
+    width: 29px;
+    height: 29px;
+    border-radius: 20%;
+    background-color: #21340C;
+}
+.popup.registro .icon.nombre {
+    background-image: url(../img/nombre.png);
+}
+.popup.registro .icon.sexo {
+    background-image: url(../img/sexo.png);
+}
+.popup.registro .icon.fechaNacimiento {
+    background-image: url(../img/fechaNacimiento.png);
+}
+.popup.registro .icon.peso {
+    background-image: url(../img/peso.png);
+}
+.popup.registro .icon.altura {
+    background-image: url(../img/altura.png);
+}
+.popup.registro .icon.actividad {
+    background-image: url(../img/actividad.png);
+}
+.popup.registro .IMC.saludable,
+.popup.registro .icon.saludable {
+    background-color: #00CD0F;
+}
+.popup.registro .IMC.delgado,
+.popup.registro .icon.delgado {
+    background-color: #C2CD00;
+}
+.popup.registro .IMC.sobrepeso,
+.popup.registro .icon.sobrepeso {
+    background-color: #CD6300;
+}
+.popup.registro .IMC.obeso,
+.popup.registro .icon.obeso {
+    background-color: #CD0011;
+}
+.popup.registro .IMC.morbido,
+.popup.registro .icon.morbido {
+    background-color: #B000CD;
+}
+.popup.registro .button.active {
+    background: #21340C;
+    color: #FDE69F;
+    border: 1px solid #21340C;
+}
