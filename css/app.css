@@ -45,27 +45,6 @@ body {
     Pages styling
 ==============================*/
 
-.pages {
-    background: #FDE7A0;
-}
-/*.page[data-page=home],
-.page[data-page="detail"] {*/
-
-.page {
-    background: none;
-    background: #FDE7A0 url(../img/bg.jpg) no-repeat center;
-    -webkit-background-size: cover;
-    background-size: cover;
-}
-/* iOS over scrolling fix */
-
-html.ios .page {
-    overflow: auto;
-    -webkit-overflow-scrolling: touch;
-}
-html.ios .page-content {
-    margin-bottom: 1px;
-}
 .content-block-title {
     color: #21340C;
 }

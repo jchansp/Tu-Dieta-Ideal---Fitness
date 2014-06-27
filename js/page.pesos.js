@@ -1,6 +1,6 @@
 $$(document).on('pageInit', function (e) {
     var page = e.detail.page;
-    if (page.name === 'peso') {
+    if (page.name === 'pesos') {
         /*if (Usuario.semanas && Usuario.pesos && Usuario.altura) {
             Usuario.semanas.forEach(function (semana, i) {
                 var fecha = [(semana.getDate() < 10) ? '0' + semana.getDate() : semana.getDate(),
@@ -71,5 +71,14 @@ $$(document).on('pageInit', function (e) {
             //    scaleStartValue: Usuario.pesoMinimoUltimoMes * 0.95,
             //});
         }*/
+        $$('#demoform-2').on('change', function (e) {
+            console.log(e);
+            for (var i = 0; i < this.elements.length; i++) {
+                console.log(this.elements[i].value);
+            }
+            /*this.elements.forEach(function (element) {
+                console.log(element);
+            });*/
+        });
     }
 });

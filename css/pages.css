@@ -1,0 +1,18 @@
+/* iOS over scrolling fix */
+
+html.ios .page {
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+}
+html.ios .page-content {
+    margin-bottom: 1px;
+}
+.pages {
+    background: #FDE7A0;
+}
+.page {
+    background: none;
+    background: #FDE7A0 url(../img/bg.jpg) no-repeat center;
+    -webkit-background-size: cover;
+    background-size: cover;
+}
