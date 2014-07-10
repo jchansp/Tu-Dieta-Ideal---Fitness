@@ -353,7 +353,7 @@ strong,
     background-image: url(../img/fondo1.png);
 }
 
-[data-page=imc] > .page-content {
+[data-page=bodyMassIndex] > .page-content {
     background-image: url(../img/fondo2.png);
 }
 
@@ -405,10 +405,10 @@ i.tabbar-video-icon {
 .active i.tabbar-video-icon {
     background-image: url(../img/tabbar-active-video-icon.png);
 }
-i.icon.icon-imc {
+i.icon.icon-bodyMassIndex {
     width: 29px;
     height: 29px;
-    background-image: url(../img/i-imc.png);
+    background-image: url(../img/i-bodyMassIndex.png);
 }
 i.icon.icon-dietas {
     width: 29px;
@@ -425,20 +425,20 @@ i.icon.icon-configuracion {
     height: 29px;
     background-image: url(../img/i-configuracion.png);
 }
-i.icon.icon-form-peso {
+i.icon.icon-form-weight {
     width: 29px;
     height: 29px;
-    background-image: url(../img/i-form-peso.png);
+    background-image: url(../img/i-form-weight.png);
 }
-i.icon.icon-form-altura {
+i.icon.icon-form-height {
     width: 29px;
     height: 29px;
-    background-image: url(../img/i-form-altura.png);
+    background-image: url(../img/i-form-height.png);
 }
-i.icon.icon-form-actividad {
+i.icon.icon-form-physicalActivity {
     width: 29px;
     height: 29px;
-    background-image: url(../img/i-form-actividad.png);
+    background-image: url(../img/i-form-physicalActivity.png);
 }
 i.icon.icon-saludable {
     width: 29px;
@@ -450,10 +450,10 @@ i.icon.icon-delgado {
     height: 29px;
     background-image: url(../img/i-delgado.png);
 }
-i.icon.icon-sobrepeso {
+i.icon.icon-sobreweight {
     width: 29px;
     height: 29px;
-    background-image: url(../img/i-sobrepeso.png);
+    background-image: url(../img/i-sobreweight.png);
 }
 i.icon.icon-obeso {
     width: 29px;
@@ -501,7 +501,7 @@ i.icon.icon-pescado {
     background-image: url(../img/i-pescado.png);
 }
 /*
-    IMC
+    bodyMassIndex
 */
 
 .saludable,
@@ -511,7 +511,7 @@ i.icon.icon-pescado {
 .delgado {
     background-color: #C2CD00;
 }
-.sobrepeso {
+.sobreweight {
     background-color: #CD6300;
 }
 .obeso {
@@ -520,7 +520,7 @@ i.icon.icon-pescado {
 .morbido {
     background-color: #B000CD;
 }
-[data-page=imc] .imc {
+[data-page=bodyMassIndex] .bodyMassIndex {
     text-align: center;
     /*color: #FFF;*/
     margin: 0;

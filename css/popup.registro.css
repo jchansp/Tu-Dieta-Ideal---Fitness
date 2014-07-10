@@ -70,7 +70,7 @@
     color: #FDE69F;
     visibility: hidden;
 }
-.popup.registro div[class*="col-"].IMC {
+.popup.registro div[class*="col-"].bodyMassIndex {
     visibility: inherit;
 }
 .popup.registro div[class*="col-"] div:first-child {
@@ -103,41 +103,41 @@
     border-radius: 20%;
     background-color: #21340C;
 }
-.popup.registro .icon.nombre {
-    background-image: url(../img/nombre.png);
+.popup.registro .icon.name {
+    background-image: url(../img/name.png);
 }
-.popup.registro .icon.sexo {
-    background-image: url(../img/sexo.png);
+.popup.registro .icon.sex {
+    background-image: url(../img/sex.png);
 }
-.popup.registro .icon.fechaNacimiento {
-    background-image: url(../img/fechaNacimiento.png);
+.popup.registro .icon.dateOfBirth {
+    background-image: url(../img/dateOfBirth.png);
 }
-.popup.registro .icon.peso {
-    background-image: url(../img/peso.png);
+.popup.registro .icon.weight {
+    background-image: url(../img/weight.png);
 }
-.popup.registro .icon.altura {
-    background-image: url(../img/altura.png);
+.popup.registro .icon.height {
+    background-image: url(../img/height.png);
 }
-.popup.registro .icon.actividad {
-    background-image: url(../img/actividad.png);
+.popup.registro .icon.physicalActivity {
+    background-image: url(../img/physicalActivity.png);
 }
-.popup.registro .IMC.saludable,
+.popup.registro .bodyMassIndex.saludable,
 .popup.registro .icon.saludable {
     background-color: #00CD0F;
 }
-.popup.registro .IMC.delgado,
+.popup.registro .bodyMassIndex.delgado,
 .popup.registro .icon.delgado {
     background-color: #C2CD00;
 }
-.popup.registro .IMC.sobrepeso,
+.popup.registro .bodyMassIndex.sobrepeso,
 .popup.registro .icon.sobrepeso {
     background-color: #CD6300;
 }
-.popup.registro .IMC.obeso,
+.popup.registro .bodyMassIndex.obeso,
 .popup.registro .icon.obeso {
     background-color: #CD0011;
 }
-.popup.registro .IMC.morbido,
+.popup.registro .bodyMassIndex.morbido,
 .popup.registro .icon.morbido {
     background-color: #B000CD;
 }

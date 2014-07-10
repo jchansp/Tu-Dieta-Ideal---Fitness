@@ -1,4 +1,4 @@
-$$('.popup.peso .add').on('click', function () {
+$$('.popup.weight .add').on('click', function () {
     var title = $$('.popup input[name="title"]').val().trim();
     if (title.length === 0) {
         return;

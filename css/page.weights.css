@@ -2,16 +2,16 @@
     Pesos
 ==============================*/
 
-.page[data-page=pesos] .icon {
+.page[data-page=weights] .icon {
     width: 29px;
     height: 29px;
     border-radius: 20%;
 }
-.page[data-page=pesos] .icon {
+.page[data-page=weights] .icon {
     width: 29px;
     height: 29px;
     border-radius: 20%;
 }
-.page[data-page=pesos] .list-block .swipeout-content {
+.page[data-page=weights] .list-block .swipeout-content {
     background: #FDE69F;
 }

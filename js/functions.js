@@ -2,6 +2,21 @@
 
     'use strict';
 
+    window.bodyMassIndexRange = function (bodyMassIndex) {
+        switch (true) {
+        case (bodyMassIndex < 18.5):
+            return 1;
+        case (bodyMassIndex >= 18.5 && bodyMassIndex < 25):
+            return 2;
+        case (bodyMassIndex >= 25 && bodyMassIndex < 30):
+            return 3;
+        case (bodyMassIndex >= 30 && bodyMassIndex < 40):
+            return 4;
+        case (bodyMassIndex >= 40):
+            return 5;
+        }
+    };
+
     window.dateToJSON = function (date) {
         /* Si es una fecha de verdad, la parseamos para devolver un string en formato yyyy-mm-dd */
         return (isDate(date)) ? JSON.stringify(date).replace('"', '').split('T')[0] : null;
@@ -30,6 +45,14 @@
     window.JSONtoDate = function (JSONdate) {
         /* Devolvemos una nueva fecha a partir de la que nos pasen */
         return (isString(JSONdate) && new RegExp(/^\d{4}-\d{2}-\d{2}$/).test(JSONdate)) ? new Date(JSONdate) : null;
+    };
+
+    window.JSONtoNumber = function (JSONnumber) {
+        return (isString(JSONnumber)) ? round(JSONnumber) : null;
+    };
+
+    window.numberToJSON = function (number) {
+        return (isNumber(number)) ? JSON.stringify(number) : null;
     };
 
     window.round = function (number) {

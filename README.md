@@ -1,2 +1,2 @@
-Tu-Dieta-Ideal---Fitness
+Tu Dieta Ideal + Fitness
 ========================

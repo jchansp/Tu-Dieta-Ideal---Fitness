@@ -24,14 +24,14 @@ var myApp = new Framework7({
     },
     onAppInit: function () {
         /*window.localStorage.clear();
-        Usuario.actividad = 1;
-        Usuario.altura = 1.86;
-        Usuario.fechaInicio = new Date(2014, 3 - 1, 21);
-        Usuario.fechaNacimiento = new Date(1981, 10 - 1, 7);
-        Usuario.nombre = 'Jesús';
-        Usuario.pesos = [85, null, 83, null, 81, 80, 79, 80, 81, null];
-        Usuario.sexo = 'Masculino';
-        Usuario.pesosObjetivo = [80, 78];*/
+        User.physicalActivity = 1;
+        User.height = 1.86;
+        User.initialDate = new Date(2014, 3 - 1, 21);
+        User.dateOfBirth = new Date(1981, 10 - 1, 7);
+        User.name = 'Jesús';
+        User.weights = [85, null, 83, null, 81, 80, 79, 80, 81, null];
+        User.sex = 'Masculino';
+        User.targetWeights = [80, 78];*/
     },
     onAjaxComplete: function (xhr) {
         //console.log(xhr);
@@ -91,37 +91,37 @@ $$(document).on('pageInit', function (e) {
     }*/
 
     if (page.name === 'configuracion') {
-        if (Usuario.nombre)
-            $$('input.nombre').val(Usuario.nombre);
-        if (Usuario.sexo)
-            $$('select.sexo').val(Usuario.sexo);
-        if (Usuario.fechaNacimiento)
-            $$('input.fechaNacimiento').val(Usuario.fechaNacimiento);
-        if (Usuario.peso)
-            $$('input.peso').val(Usuario.peso);
-        if (Usuario.altura)
-            $$('input.altura').val(Usuario.altura);
-        if (Usuario.actividad)
-            $$('input.actividad').val(Usuario.actividad);
+        if (User.name)
+            $$('input.name').val(User.name);
+        if (User.sex)
+            $$('select.sex').val(User.sex);
+        if (User.dateOfBirth)
+            $$('input.dateOfBirth').val(User.dateOfBirth);
+        if (User.weight)
+            $$('input.weight').val(User.weight);
+        if (User.height)
+            $$('input.height').val(User.height);
+        if (User.physicalActivity)
+            $$('input.physicalActivity').val(User.physicalActivity);
 
-        $$('input.peso').parent().parent().parent().find('.subtitle').html('(' + $$('input.peso').val() + ')');
-        $$('input.altura').parent().parent().parent().find('.subtitle').html('(' + $$('input.altura').val() + ')');
+        $$('input.weight').parent().parent().parent().find('.subtitle').html('(' + $$('input.weight').val() + ')');
+        $$('input.height').parent().parent().parent().find('.subtitle').html('(' + $$('input.height').val() + ')');
 
-        $$('input.peso').on('change', function (e) {
-            $$('input.peso').parent().parent().parent().find('.subtitle').html('(' + $$('input.peso').val() + ')');
+        $$('input.weight').on('change', function (e) {
+            $$('input.weight').parent().parent().parent().find('.subtitle').html('(' + $$('input.weight').val() + ')');
         });
-        $$('input.altura').on('change', function (e) {
-            $$('input.altura').parent().parent().parent().find('.subtitle').html('(' + parseFloat($$('input.altura').val()).toFixed(2) + ')');
+        $$('input.height').on('change', function (e) {
+            $$('input.height').parent().parent().parent().find('.subtitle').html('(' + parseFloat($$('input.height').val()).toFixed(2) + ')');
         });
 
         $$('form.configuracion').on('submit', function (e) {
             e.preventDefault();
-            Usuario.nombre = $$('input.nombre').val();
-            Usuario.sexo = $$('select.sexo').val();
-            Usuario.fechaNacimiento = $$('input.fechaNacimiento').val();
-            Usuario.peso = $$('input.peso').val();
-            Usuario.altura = parseFloat($$('input.altura').val()).toFixed(2);
-            Usuario.actividad = $$('select.actividad').val();
+            User.name = $$('input.name').val();
+            User.sex = $$('select.sex').val();
+            User.dateOfBirth = $$('input.dateOfBirth').val();
+            User.weight = $$('input.weight').val();
+            User.height = parseFloat($$('input.height').val()).toFixed(2);
+            User.physicalActivity = $$('select.physicalActivity').val();
             myApp.alert('Datos guardados');
         });
 
@@ -130,15 +130,15 @@ $$(document).on('pageInit', function (e) {
         });
     };
 
-    if (page.name === 'imc') {
-        if (Usuario.IMC) {
-            //var Usuario.IMC = (Usuario.peso / Math.pow(Usuario.altura, 2)).toFixed(2);
-            if (Usuario.IMC < 18.5) $$('h2.imc').parent().addClass('delgado');
-            if (Usuario.IMC >= 18.5 && Usuario.IMC <= 25) $$('h2.imc').parent().addClass('saludable');
-            if (Usuario.IMC > 25 && Usuario.IMC <= 30) $$('h2.imc').parent().addClass('sobrepeso');
-            if (Usuario.IMC > 30 && Usuario.IMC <= 40) $$('h2.imc').parent().addClass('obeso');
-            if (Usuario.IMC > 40) $$('h2.imc').parent().addClass('morbido');
-            $$('[data-page=imc] h2.imc').html(Usuario.IMC.toFixed(2));
+    if (page.name === 'bodyMassIndex') {
+        if (User.bodyMassIndex) {
+            //var User.bodyMassIndex = (User.weight / Math.pow(User.height, 2)).toFixed(2);
+            if (User.bodyMassIndex < 18.5) $$('h2.bodyMassIndex').parent().addClass('delgado');
+            if (User.bodyMassIndex >= 18.5 && User.bodyMassIndex <= 25) $$('h2.bodyMassIndex').parent().addClass('saludable');
+            if (User.bodyMassIndex > 25 && User.bodyMassIndex <= 30) $$('h2.bodyMassIndex').parent().addClass('sobreweight');
+            if (User.bodyMassIndex > 30 && User.bodyMassIndex <= 40) $$('h2.bodyMassIndex').parent().addClass('obeso');
+            if (User.bodyMassIndex > 40) $$('h2.bodyMassIndex').parent().addClass('morbido');
+            $$('[data-page=bodyMassIndex] h2.bodyMassIndex').html(User.bodyMassIndex.toFixed(2));
         }
     };
 
@@ -276,35 +276,35 @@ $$(document).on('pageInit', function (e) {
     };
 
     if (page.name === 'tmb') {
-        //(10 x peso en kg) + (6,25 × altura en cm) - (5 × edad en años) + 5
-        //(10 x peso en kg) + (6,25 × altura en cm) - (5 × edad en años) - 161
-        if (Usuario.fechaNacimiento && Usuario.sexo && Usuario.peso && Usuario.altura) {
-            $$('[data-page=tmb] h2.tmb').html(Usuario.TMB.toFixed(2));
-            $$('[data-page=tmb] h2.calorias-recomendadas').html(Usuario.caloriasDiariasNecesarias.toFixed(0));
+        //(10 x weight en kg) + (6,25 × height en cm) - (5 × age en años) + 5
+        //(10 x weight en kg) + (6,25 × height en cm) - (5 × age en años) - 161
+        if (User.dateOfBirth && User.sex && User.weight && User.height) {
+            $$('[data-page=tmb] h2.tmb').html(User.TMB.toFixed(2));
+            $$('[data-page=tmb] h2.calorias-recomendadas').html(User.dailyCaloricNeeds.toFixed(0));
         }
     };
 });
 
 function refreshChart() {
     $$('#canvas').html('');
-    var semanas = Usuario.semanas.splice(Usuario.semanas.length - 4, Usuario.semanas.length - 1);
-    semanas.forEach(function (semana, i) {
-        semanas[i] = [(semana.getDate() < 10) ? '0' + semana.getDate() : semana.getDate(),
-            ((semana.getMonth() + 1) < 10) ? '0' + (semana.getMonth() + 1) : (semana.getMonth() + 1),
-            semana.getFullYear() - 2000].join('/')
+    var weeks = User.weeks.splice(User.weeks.length - 4, User.weeks.length - 1);
+    weeks.forEach(function (week, i) {
+        weeks[i] = [(week.getDate() < 10) ? '0' + week.getDate() : week.getDate(),
+            ((week.getMonth() + 1) < 10) ? '0' + (week.getMonth() + 1) : (week.getMonth() + 1),
+            week.getFullYear() - 2000].join('/')
     });
     var width = $$('#canvas').parent().width();
     $$('#canvas').attr("width", width);
     $$('#canvas').attr("height", width / 1.9);
     new Chart($$('#canvas')[0].getContext("2d")).Line({
-        labels: semanas,
+        labels: weeks,
         datasets: [
             {
                 fillColor: "rgba(255,0,0,0.5)",
                 strokeColor: "rgba(255,0,0,1)",
                 pointColor: "rgba(255,0,0,1)",
                 pointStrokeColor: "#fff",
-                data: Usuario.pesos.splice(Usuario.pesos.length - 4, Usuario.pesos.length - 1)
+                data: User.weights.splice(User.weights.length - 4, User.weights.length - 1)
                 },
             {
                 fillColor: "rgba(0,0,255,0.5)",
@@ -321,8 +321,8 @@ function refreshChart() {
         scaleOverride: true,
         //scaleFontSize : 0,
         scaleSteps: 5,
-        scaleStepWidth: ((Usuario.pesoMaximoUltimoMes * 1.05 - Usuario.pesoMinimoUltimoMes * 0.95) / 5).toFixed(2),
-        scaleStartValue: Usuario.pesoMinimoUltimoMes * 0.95
+        scaleStepWidth: ((User.lastMonthsMaximumWeight * 1.05 - User.lastMonthsMinimumWeight * 0.95) / 5).toFixed(2),
+        scaleStartValue: User.lastMonthsMinimumWeight * 0.95
     });
 };
 myApp.$(window).on('orientationchange', function () {

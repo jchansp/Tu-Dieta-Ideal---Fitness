@@ -34,7 +34,7 @@
     font-size: 3.9vw;
     margin-top: 60%;
 }
-.page[data-page=home] .IMC.saludable {
+.page[data-page=home] .bodyMassIndex.saludable {
     background-color: #53B021;
     -webkit-animation: saludable 2s;
     animation: saludable 2s;
@@ -55,7 +55,7 @@
         background-color: #53B021;
     }
 }
-.page[data-page=home] .IMC.delgado {
+.page[data-page=home] .bodyMassIndex.delgado {
     background-color: #C2CD00;
     -webkit-animation: delgado 2s;
     animation: delgado 2s;
@@ -76,7 +76,7 @@
         background-color: #C2CD00;
     }
 }
-.page[data-page=home] .IMC.sobrepeso {
+.page[data-page=home] .bodyMassIndex.sobrepeso {
     background-color: #CD6300;
     -webkit-animation: sobrepeso 2s;
     animation: sobrepeso 2s;
@@ -97,7 +97,7 @@
         background-color: #CD6300;
     }
 }
-.page[data-page=home] .IMC.obeso {
+.page[data-page=home] .bodyMassIndex.obeso {
     background-color: #CD0011;
     -webkit-animation: obeso 2s;
     animation: obeso 2s;
@@ -118,7 +118,7 @@
         background-color: #CD0011;
     }
 }
-.page[data-page=home] .IMC.morbido {
+.page[data-page=home] .bodyMassIndex.morbido {
     background-color: #B000CD;
     -webkit-animation: morbido 2s;
     animation: morbido 2s;

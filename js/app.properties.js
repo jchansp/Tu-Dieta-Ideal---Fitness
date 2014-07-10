@@ -1,108 +1,86 @@
-Object.defineProperty(myApp, "altura", {
+Object.defineProperty(myApp, 'User', {
     get: function () {
-        if (this.formGetData('Usuario') && this.formGetData('Usuario').altura)
-            return parseFloat(parseFloat(this.formGetData('Usuario').altura).toFixed(2))
-        else
-            return null;
-    }
-});
-Object.defineProperty(myApp, "fechaInicio", {
-    get: function () {
-        if (this.formGetData('Usuario') && this.formGetData('Usuario').fechaInicio)
-            return new Date(this.formGetData('Usuario').fechaInicio);
-        else
-            return new Date();
-    }
-});
-Object.defineProperty(myApp, "fechaNacimiento", {
-    get: function () {
-        if (this.formGetData('Usuario') && this.formGetData('Usuario').fechaNacimiento)
-            return new Date(this.formGetData('Usuario').fechaNacimiento);
-        else
-            return null;
-    }
-});
-Object.defineProperty(myApp, "IMC", {
-    get: function () {
-        if (this.peso && this.altura)
-            return parseFloat((this.peso / Math.pow(this.altura, 2)).toFixed(2));
-        else
-            return null;
-    }
-});
-Object.defineProperty(myApp, "peso", {
-    get: function () {
-        if (this.formGetData('Usuario') && this.formGetData('Usuario').peso)
-            return parseFloat(parseFloat(this.formGetData('Usuario').peso).toFixed(2));
-        else
-            return null;
-    }
-});
-Object.defineProperty(myApp, "pesos", {
-    get: function () {
-        if (this.formGetData('Usuario') && this.formGetData('Usuario').pesos) {
-            var pesos = this.formGetData('Usuario').pesos;
-            pesos.forEach(function (peso, i) {
-                pesos[i] = parseFloat(parseFloat(peso).toFixed(2));
-            });
-            return pesos;
-        } else
-            return null;
+        if (this.formGetData && this.formGetData('User')) return this.formGetData('User');
     },
-    set: function (pesos) {
-        var i, Usuario;
-        /* Validamos los datos */
-        if (!this.formGetData('Usuario'))
-        /* Si no existe entrada de Usuario */
-            return;
-        if (!isArray(pesos))
-        /* Si pesos no es un array */
-            return;
-        for (i = 0; i < pesos.length; i++) {
-            /* Por cada peso */
-            for (property in pesos[i]) {
-                /* Por cada propiedad de cada peso */
-                if (property != 'fecha' && !property == 'peso')
-                /* Si la propiedad no se llama ni fecha ni peso */
-                    return;
-                if (property == 'fecha' && !isDate(pesos[i].fecha))
-                /* Si la propiedad fecha no es una fecha */
-                    return;
-                if (property == 'peso' && !isNumber(pesos[i].peso))
-                /* Si la propiedad peso no es un número */
-                    return;
-            }
-            /* Parseamos la fecha para que tenga en un formato string yyyy-mm-dd */
-            pesos[i].fecha = dateToJSON(pesos[i].fecha);
+    set: function (User) {
+        this.formStoreData('User', User);
+    }
+});
+Object.defineProperty(myApp, 'height', {
+    get: function () {
+        if (this.User && this.User.height) return JSONtoNumber(this.User.height);
+    }
+});
+//Object.defineProperty(myApp, 'initialDate', {
+//    get: function () {
+//        if (this.User && this.User.initialDate) return new Date(this.User.initialDate);
+//    }
+//});
+//Object.defineProperty(myApp, 'dateOfBirth', {
+//    get: function () {
+//        if (this.User && this.User.dateOfBirth) return new Date(this.User.dateOfBirth);
+//    }
+//});
+Object.defineProperty(myApp, 'bodyMassIndex', {
+    get: function () {
+        if (this.weight && this.height) return round(this.weight / Math.pow(this.height, 2));
+    }
+});
+Object.defineProperty(myApp, 'weight', {
+    get: function () {
+        if (this.User && this.User.weights && this.User.weights.length > 0) return JSONtoNumber(this.User.weights[this.User.weights.length - 1].weight);
+    }
+});
+//Object.defineProperty(myApp, 'initialWeight', {
+//    get: function () {
+//        if (this.User && this.User.weight) return round(this.User.weight);
+//    }
+//});
+Object.defineProperty(myApp, 'weights', {
+    get: function () {
+        if (this.User && this.User.weights) {
+            var weights = this.User.weights;
+            weights.forEach(function (weight, i) {
+                for (property in weight) {
+                    if (property === 'date') weight.date = JSONtoDate(weight.date);
+                    if (property === 'weight') weight.weight = JSONtoNumber(weight.weight);
+                }
+            });
+            return weights;
         }
-        /* Guardamos los datos */
-        Usuario = this.formGetData('Usuario');
-        Usuario.pesos = pesos;
-        this.formStoreData('Usuario', Usuario);
+    },
+    set: function (weights) {
+        if (this.User && isArray(weights)) {
+            weights.forEach(function (weight, i) {
+                for (property in weight) {
+                    if (property === 'date') weight.date = dateToJSON(weight.date);
+                    if (property === 'weight') weight.weight = numberToJSON(weight.weight);
+                }
+            });
+            var User = this.User;
+            User.weights = weights;
+            this.User = User;
+        }
     }
 });
-Object.defineProperty(myApp, "pesoIdeal", {
+Object.defineProperty(myApp, 'idealWeight', {
     get: function () {
-        if (this.altura)
-            return parseFloat((21.75 * Math.pow(this.altura, 2)).toFixed(2));
-        else
-            return null;
+        if (this.height) return round(21.75 * Math.pow(this.height, 2));
     }
 });
-Object.defineProperty(myApp, "rangoIMC", {
+Object.defineProperty(myApp, 'bodyMassIndexRange', {
     get: function () {
-        if (this.IMC) {
-            if (this.IMC < 18.5)
+        if (this.bodyMassIndex) {
+            if (this.bodyMassIndex < 18.5)
                 return 'delgado';
-            if (this.IMC >= 18.5 && this.IMC < 25)
+            if (this.bodyMassIndex >= 18.5 && this.bodyMassIndex < 25)
                 return 'saludable';
-            if (this.IMC >= 25 && this.IMC < 30)
-                return 'sobrepeso';
-            if (this.IMC >= 30 && this.IMC < 40)
+            if (this.bodyMassIndex >= 25 && this.bodyMassIndex < 30)
+                return 'sobreweight';
+            if (this.bodyMassIndex >= 30 && this.bodyMassIndex < 40)
                 return 'obeso';
-            if (this.IMC >= 40)
+            if (this.bodyMassIndex >= 40)
                 return 'morbido';
-        } else
-            return null;
+        }
     }
 });

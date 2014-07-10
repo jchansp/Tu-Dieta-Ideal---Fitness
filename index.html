@@ -39,9 +39,9 @@
     <link rel="stylesheet" href="css/modal.css">
     <link rel="stylesheet" href="css/navbar.css">
     <link rel="stylesheet" href="css/page.home.css">
-    <link rel="stylesheet" href="css/page.pesos.css">
+    <link rel="stylesheet" href="css/page.weights.css">
     <link rel="stylesheet" href="css/pages.css">
-    <link rel="stylesheet" href="css/popup.peso.css">
+    <link rel="stylesheet" href="css/popup.weight.css">
     <link rel="stylesheet" href="css/popup.registro.css">
     <link rel="stylesheet" href="css/tabbar.css">
 </head>
@@ -59,10 +59,10 @@
         <div class="list-block">
             <ul>
                 <li>
-                    <a href="imc.html" class="close-panel item-link">
+                    <a href="bodyMassIndex.html" class="close-panel item-link">
                         <div class="item-content">
                             <div class="item-media">
-                                <i class="icon icon-imc"></i>
+                                <i class="icon icon-bodyMassIndex"></i>
                             </div>
                             <div class="item-inner">
                                 <div class="item-title">Índice de masa corporal</div>
@@ -119,10 +119,10 @@
                     </a>
                 </li>
                 <li>
-                    <a href="pesos.html" class="close-panel item-link">
+                    <a href="weights.html" class="close-panel item-link">
                         <div class="item-content">
                             <div class="item-media">
-                                <i class="icon icon-pesos"></i>
+                                <i class="icon icon-weights"></i>
                             </div>
                             <div class="item-inner">
                                 <div class="item-title">Pesos</div>
@@ -236,16 +236,16 @@
                     <div class="page-content">
                         <div class="content-block">
                             <div class="row">
-                                <div class="peso col-33">
+                                <div class="weight col-33">
                                     <div></div>
-                                    <a href="pesos.html" class="numero">
+                                    <a href="weights.html" class="numero">
 
                                     </a>
                                     <div class="texto">
                                         PESO
                                     </div>
                                 </div>
-                                <div class="IMC col-33">
+                                <div class="bodyMassIndex col-33">
                                     <div></div>
                                     <div class="numero">
 
@@ -254,7 +254,7 @@
                                         I.M.C.
                                     </div>
                                 </div>
-                                <div class="pesoIdeal col-33">
+                                <div class="idealWeight col-33">
                                     <div></div>
                                     <div class="numero">
 
@@ -265,7 +265,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="content-block-title">Evolución de pesos</div>
+                        <div class="content-block-title">Evolución de weights</div>
                         <a href="dietas.html">Dietas</a>
                         <div class="content-block">
                             <canvas id="canvas"></canvas>
@@ -291,7 +291,7 @@
                         <div class="list-block">
                             <ul>
                                 <li>
-                                    <a href="pesos.html" class="item-link">
+                                    <a href="weights.html" class="item-link">
                                         <div class="item-content">
                                             <div class="item-inner">
                                                 <div class="item-title">Pesos</div>
@@ -316,7 +316,7 @@
                         <div class="list-block">
                             <ul>
                                 <li>
-                                    <a href="pesos.html" class="item-link">
+                                    <a href="weights.html" class="item-link">
                                         <div class="item-content">
                                             <div class="item-inner">
                                                 <div class="item-title">Pesos</div>
@@ -501,7 +501,7 @@
             </div>
             <div class="toolbar">
                 <div class="toolbar-inner">
-                    <a href="pesos.html" class="link">Pesos</a>
+                    <a href="weights.html" class="link">Pesos</a>
                     <a href="#" data-popover=".popover-menu" class="open-popover link">Menú</a>
                 </div>
             </div>
@@ -545,18 +545,18 @@
                                 </div>
                                 <div class="content-block-title">Datos Personales</div>
                                 <div class="list-block">
-                                    <form id="Usuario" class="store-data">
-                                        <input name="fechaInicio" class="fechaInicio" type="hidden" />
+                                    <form id="User" class="store-data">
+                                        <!--<input name="initialDate" class="initialDate" type="hidden" />-->
                                         <ul>
                                             <li>
                                                 <div class="item-content">
                                                     <div class="item-media">
-                                                        <i class="icon nombre"></i>
+                                                        <i class="icon name"></i>
                                                     </div>
                                                     <div class="item-inner">
                                                         <div class="item-title label">Nombre</div>
                                                         <div class="item-input">
-                                                            <input name="nombre" class="nombre" type="text" placeholder="Tu nombre" />
+                                                            <input name="name" class="name" type="text" placeholder="Tu nombre" />
                                                         </div>
                                                     </div>
                                                 </div>
@@ -564,12 +564,12 @@
                                             <li>
                                                 <div class="item-content">
                                                     <div class="item-media">
-                                                        <i class="icon sexo"></i>
+                                                        <i class="icon sex"></i>
                                                     </div>
                                                     <div class="item-inner">
                                                         <div class="item-title label">Sexo</div>
                                                         <div class="item-input">
-                                                            <select name="sexo">
+                                                            <select name="sex">
                                                                 <option>Masculino</option>
                                                                 <option>Femenino</option>
                                                             </select>
@@ -580,12 +580,12 @@
                                             <li>
                                                 <div class="item-content">
                                                     <div class="item-media">
-                                                        <i class="icon fechaNacimiento"></i>
+                                                        <i class="icon dateOfBirth"></i>
                                                     </div>
                                                     <div class="item-inner">
                                                         <div class="item-title label">Fec. nac.</div>
                                                         <div class="item-input">
-                                                            <input name="fechaNacimiento" type="date" placeholder="Fec. nac." value="1990-01-01" />
+                                                            <input name="dateOfBirth" type="date" placeholder="Fec. nac." value="1990-01-01" />
                                                         </div>
                                                     </div>
                                                 </div>
@@ -593,15 +593,15 @@
                                             <li>
                                                 <div class="item-content">
                                                     <div class="item-media">
-                                                        <i class="icon peso"></i>
+                                                        <i class="icon weight"></i>
                                                     </div>
                                                     <div class="item-inner">
                                                         <div class="item-title label">Peso (kg.)
                                                         </div>
                                                         <div class="item-input">
                                                             <div class="range-slider">
-                                                                <!--<input name="peso" type="range" min="45" max="120" value="65" step="1" />-->
-                                                                <input name="peso" type="number" min="45" max="120" value="65" step="5" />
+                                                                <!--<input name="weight" type="range" min="45" max="120" value="65" step="1" />-->
+                                                                <input name="initialWeight" type="number" min="45" max="120" value="65" step="5" />
                                                             </div>
                                                         </div>
                                                     </div>
@@ -610,15 +610,15 @@
                                             <li>
                                                 <div class="item-content">
                                                     <div class="item-media">
-                                                        <i class="icon altura"></i>
+                                                        <i class="icon height"></i>
                                                     </div>
                                                     <div class="item-inner">
                                                         <div class="item-title label">Alto (m.)
                                                         </div>
                                                         <div class="item-input">
                                                             <div class="range-slider">
-                                                                <!--<input name="altura" type="range" min="1.45" max="2.1" value="1.7" step="0.01" />-->
-                                                                <input name="altura" type="number" min="1.45" max="2.1" value="1.7" step="0.01" />
+                                                                <!--<input name="height" type="range" min="1.45" max="2.1" value="1.7" step="0.01" />-->
+                                                                <input name="height" type="number" min="1.45" max="2.1" value="1.7" step="0.01" />
                                                             </div>
                                                         </div>
                                                     </div>
@@ -627,12 +627,12 @@
                                             <li>
                                                 <div class="item-content">
                                                     <div class="item-media">
-                                                        <i class="icon actividad"></i>
+                                                        <i class="icon physicalActivity"></i>
                                                     </div>
                                                     <div class="item-inner">
                                                         <div class="item-title label">Actividad</div>
                                                         <div class="item-input">
-                                                            <select name="actividad">
+                                                            <select name="physicalActivity">
                                                                 <option value="1">Poco o ningún ejercicio</option>
                                                                 <option value="2">Ejercicio ligero (1-3 días a la semana)</option>
                                                                 <option value="3">Ejercicio moderado (3-5 días a la semana)</option>
@@ -671,7 +671,7 @@
                                         <div class="col-33">
                                             <div></div>
                                         </div>
-                                        <div class="IMC col-33">
+                                        <div class="bodyMassIndex col-33">
                                             <div></div>
                                             <div class="numero">
 
@@ -762,7 +762,7 @@
         </div>
     </div>
     <!-- Popup Pesos -->
-    <div class="popup peso">
+    <div class="popup weight">
         <div class="view view-popup navbar-fixed">
             <div class="navbar">
                 <div class="navbar-inner">
@@ -772,7 +772,7 @@
                     </div>
                 </div>
             </div>
-            <div data-page="peso" class="page">
+            <div data-page="weight" class="page">
                 <div class="content-block">
                     <p>About</p>
                     <p><a href="#" class="close-popup">Close popup</a>
@@ -788,7 +788,7 @@
             <div class="list-block">
                 <ul>
                     <li><a href="index.html" class="list-button item-link">Inicio</a></li>
-                    <li><a href="imc.html" class="list-button item-link">Índice de masa corporal</a></li>
+                    <li><a href="bodyMassIndex.html" class="list-button item-link">Índice de masa corporal</a></li>
                     <li><a href="dietas.html" class="list-button item-link">Dietas</a></li>
                     <li><a href="videos.html" class="list-button item-link">Vídeos</a></li>
                     <li><a href="configuracion.html" class="list-button item-link">Configuración</a></li>
@@ -844,12 +844,13 @@
     <script type="text/javascript" src="js/Array.js"></script>
     <script type="text/javascript" src="js/Chart.min.js"></script>
     <!--<script type="text/javascript" src="js/Date.js"></script>-->
-    <!--<script type="text/javascript" src="js/Usuario.js"></script>-->
+    <!--<script type="text/javascript" src="js/User.js"></script>-->
     <script type="text/javascript" src="js/app.js"></script>
     <script type="text/javascript" src="js/app.properties.js"></script>
     <script type="text/javascript" src="js/functions.js"></script>
-    <script type="text/javascript" src="js/page.pesos.js"></script>
-    <script type="text/javascript" src="js/popup.peso.js"></script>
+    <script type="text/javascript" src="js/page.home.js"></script>
+    <script type="text/javascript" src="js/page.weights.js"></script>
+    <script type="text/javascript" src="js/popup.weight.js"></script>
     <script type="text/javascript" src="js/popup.registro.js"></script>
     <script type="text/javascript" src="js/tab.home.js"></script>
 </body>
