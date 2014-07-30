@@ -1,302 +1,140 @@
-<!DOCTYPE html>
 <html>
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
-    <meta name="mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <title>Tests</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-        }
-        @font-face {
-            font-family: 'Helvetica Neue';
-            src: local("Helvetica Neue Light"), local("HelveticaNeue-Light"), url("/fonts/HelveticaNeue-Light.ttf") format("truetype"), url("/fonts/HelveticaNeue-Light.woff") format("woff");
-            font-weight: 300;
-        }
-        @font-face {
-            font-family: 'Helvetica Neue';
-            src: local("Helvetica Neue Medium"), local("HelveticaNeue-Medium"), url("/fonts/HelveticaNeue-Medium.ttf") format("truetype"), url("/fonts/HelveticaNeue-Medium.woff") format("woff");
-            font-weight: 500;
-        }
-        body {
-            background: black;
-            color: white;
-            -webkit-font-smoothing: antialiased;
-            font-family: "Helvetica Neue", sans-serif;
-            font-weight: 300;
-            font-size: 12px;
-            line-height: 1.2;
-        }
-        li {
-            list-style: none;
-        }
-        .pass:before {
-            content: 'PASS: ';
-            color: blue;
-        }
-        .fail:before {
-            content: 'FAIL: ';
-            color: red;
-            font-weight: bold;
-        }
-    </style>
+    <script>
+        (function () {
+            'use strict';
+
+            var assert = function (unitTest, comparison) {
+                document.writeln('<tr>');
+                document.writeln('<td>' + unitTest + '</td>');
+                document.writeln('<td>' + (eval(comparison) ? '<span style="color:blue">OK</span>' : '<span style="color:red">KO</span>') + '</td>');
+                document.writeln('</tr>');
+            };
+
+            function areEqual(object1, object2) {
+                return JSON.stringify(object1) === JSON.stringify(object2);
+            };
+
+            window.User = {};
+            User.BLL = function (_User) {
+                /**
+                 * Private functions
+                 */
+                var isArray = function (array) {
+                    return Object.prototype.toString.call(array) === '[object Array]';
+                };
+                var isDate = function (date) {
+                    return Object.prototype.toString.call(date) === '[object Date]';
+                };
+                var isNumber = function (number) {
+                    return Object.prototype.toString.call(number) === '[object Number]';
+                };
+                var isString = function (string) {
+                    return Object.prototype.toString.call(string) === '[object String]';
+                };
+                /**
+                 * Getters & Setters
+                 */
+                this.__defineGetter__('dateOfBirth', function () {
+                    return _User.dateOfBirth;
+                });
+                this.__defineSetter__('dateOfBirth', function (dateOfBirth) {
+                    if (!isDate(_User.dateOfBirth))
+                        throw new TypeError('dateOfBirth has to be a Date');
+                });
+                this.__defineGetter__('height', function () {
+                    return _User.height;
+                });
+                this.__defineSetter__('height', function (height) {
+                    if (!isNumber(_User.height))
+                        throw new TypeError('height has to be a Number');
+                });
+                this.__defineGetter__('name', function () {
+                    return _User.name;
+                });
+                this.__defineSetter__('name', function (name) {
+                    if (!isString(_User.name))
+                        throw new TypeError('name has to be a String');
+                });
+                this.__defineGetter__('physicalActivity', function () {
+                    return _User.physicalActivity;
+                });
+                this.__defineSetter__('physicalActivity', function (physicalActivity) {
+                    if (!isNumber(_User.physicalActivity))
+                        throw new TypeError('physicalActivity∫ has to be a Number');
+                });
+                this.__defineGetter__('sex', function () {
+                    return _User.sex;
+                });
+                this.__defineSetter__('sex', function (sex) {
+                    if (!isString(_User.sex))
+                        throw new TypeError('sex has to be a String');
+                });
+                this.__defineGetter__('weights', function () {
+                    return _User.weights;
+                });
+                this.__defineSetter__('weights', function (weights) {
+                    if (!isArray(_User.weights))
+                        throw new TypeError('weights has to be an Array');
+                });
+                /**
+                 * Constructor
+                 */
+                this.dateOfBirth = _User.dateOfBirth;
+                this.height = _User.height;
+                this.name = _User.name;
+                this.physicalActivity = _User.physicalActivity;
+                this.sex = _User.sex;
+                this.weights = _User.weights;
+            };
+
+            /*User.DAL = function (dateOfBirth,
+                height,
+                name,
+                physicalActivity,
+                sex,
+                weights) {
+                this.dateOfBirth = isDate(dateOfBirth) ? dateOfBirth : undefined;
+                this.height = isNumber(height) ? height : undefined;
+                this.name = isString(name) ? name : undefined;
+                this.physicalActivity = isNumber(physicalActivity) ? physicalActivity : undefined;
+                this.sex = isString(sex) ? sex : undefined;
+                this.weights = isArray(weights) ? weights : undefined;
+            };*/
+
+            window.addEventListener('load', function () {
+
+                localStorage.clear();
+                document.writeln('<table>');
+                document.writeln('<tr>');
+                document.writeln('<th colspan=2>User.BLL.Getters</th>');
+                document.writeln('</tr>');
+                window.userBll = new User.BLL({
+                    dateOfBirth: new Date(1981, 10 - 1, 7),
+                    height: 1.86,
+                    name: 'Jesús',
+                    physicalActivity: 1,
+                    sex: 'Masculino',
+                    weights: [{
+                        id: 1,
+                        date: new Date(2014, 1 - 1, 1),
+                        weight: 82.2
+                    }]
+                });
+                assert("dateOfBirth = 7/10/81", "areEqual(userBll.dateOfBirth, new Date(1981, 10 - 1, 7))");
+                assert("height = 1.86;", "areEqual(userBll.height, 1.86)");
+                assert("name = Jesús;", "areEqual(userBll.name, 'Jesús')");
+                assert("physicalActivity = 'Jesús'", "areEqual(userBll.physicalActivity, 1)");
+                assert("sex = 'Masculino'", "areEqual(userBll.sex, 'Masculino')");
+                assert("weights = [{id: 1, date: 1/1/2014, weight: 82.2}]", "areEqual(userBll.weights, [{id: 1, date: new Date(2014, 1 - 1, 1), weight: 82.2}])");
+                document.writeln('</table>');
+            });
+        })();
+    </script>
 </head>
 
 <body>
-    <ul id="output"></ul>
-    <script type="text/javascript" src="js/framework7.min.js"></script>
-    <!--<script type="text/javascript" src="js/kitchen-sink.js"></script>-->
-    <script type="text/javascript" src="js/Array.js"></script>
-    <!--<script type="text/javascript" src="js/Chart.min.js"></script>-->
-    <!--<script type="text/javascript" src="js/Date.js"></script>-->
-    <script type="text/javascript" src="js/User.js"></script>
-    <!--<script type="text/javascript" src="js/app.js"></script>-->
-    <script>
-        var output = document.getElementById('output');
-
-        function assert(property, equals) {
-            var li = document.createElement('li');
-            li.className = 'fail';
-            li.appendChild(document.createTextNode(property));
-            li.appendChild(document.createTextNode(': '));
-            try {
-                if (typeof (equals) !== 'function' || !(new equals instanceof Error)) {
-                    li.className = eval(property + ' === ' + equals) ? 'pass' : 'fail';
-                } else
-                    try {
-                        eval(property);
-                    } catch (e) {
-                        li.className = e instanceof equals ? 'pass' : 'fail';
-                    }
-                li.appendChild(document.createTextNode((equals instanceof Error) ? equals.name : equals));
-            } catch (e) {
-                li.className = 'fail';
-                li.appendChild(document.createTextNode(e));
-            }
-            output.appendChild(li);
-        }
-        /**
-         * Validamos nulos
-         */
-        window.localStorage.clear();
-        for (var property in User) {
-            if (User.hasOwnProperty(property)) {
-                assert('User.' + property, ReferenceError)
-            }
-        }
-        for (var property in User) {
-            if (User.hasOwnProperty(property) &&
-                property !== 'dailyCaloricNeeds' &&
-                property !== 'age' &&
-                property !== 'bodyMassIndex' &&
-                property !== 'mes' &&
-                property !== 'months' &&
-                property !== 'idealWeight' &&
-                property !== 'lastMonthsMaximumWeight' &&
-                property !== 'lastMonthsMinimumWeight' &&
-                property !== 'week' &&
-                property !== 'weeks' &&
-                property !== 'seHaPesadoEstaSemana' &&
-                property !== 'TMB')
-                assert('(User.' + property + ' = null)', ReferenceError)
-        }
-        /**
-         * Validamos number
-         */
-        for (var property in User) {
-            if (User.hasOwnProperty(property)) {
-                window.localStorage.setItem(property, 1);
-            }
-        }
-        for (var property in User) {
-            if (User.hasOwnProperty(property)) {
-                if (property === 'physicalActivity' ||
-                    property === 'height')
-                    assert('User.' + property, 1);
-                else if (property === 'idealWeight')
-                    assert('User.' + property, 21.75)
-                else
-                    assert('User.' + property, TypeError)
-            }
-        }
-        for (var property in User) {
-            if (User.hasOwnProperty(property) &&
-                property !== 'dailyCaloricNeeds' &&
-                property !== 'age' &&
-                property !== 'bodyMassIndex' &&
-                property !== 'mes' &&
-                property !== 'months' &&
-                property !== 'idealWeight' &&
-                property !== 'lastMonthsMaximumWeight' &&
-                property !== 'lastMonthsMinimumWeight' &&
-                property !== 'week' &&
-                property !== 'weeks' &&
-                property !== 'seHaPesadoEstaSemana' &&
-                property !== 'TMB')
-                if (property === 'physicalActivity' ||
-                    property === 'height')
-                    assert('(User.' + property + ' = 1)', 1);
-                else
-                    assert('(User.' + property + ' = 1)', TypeError);
-
-        }
-        /**
-         * Validamos string
-         */
-        window.localStorage.clear();
-        for (var property in User) {
-            if (User.hasOwnProperty(property)) {
-                window.localStorage.setItem(property, 'a');
-            }
-        }
-        for (var property in User) {
-            if (User.hasOwnProperty(property)) {
-                assert('User.' + property, SyntaxError)
-            }
-        }
-        for (var property in User) {
-            if (User.hasOwnProperty(property)) {
-                window.localStorage.setItem(property, '"a"');
-            }
-        }
-        for (var property in User) {
-            if (User.hasOwnProperty(property)) {
-                if (property === 'name' ||
-                    property === 'sex')
-                    assert('User.' + property, '"a"');
-                else
-                    assert('User.' + property, TypeError)
-            }
-        }
-        for (var property in User) {
-            if (User.hasOwnProperty(property) &&
-                property !== 'dailyCaloricNeeds' &&
-                property !== 'age' &&
-                property !== 'bodyMassIndex' &&
-                property !== 'mes' &&
-                property !== 'months' &&
-                property !== 'idealWeight' &&
-                property !== 'lastMonthsMaximumWeight' &&
-                property !== 'lastMonthsMinimumWeight' &&
-                property !== 'week' &&
-                property !== 'weeks' &&
-                property !== 'seHaPesadoEstaSemana' &&
-                property !== 'TMB')
-                if (property === 'name' ||
-                    property === 'sex')
-                    assert('(User.' + property + ' = "a")', '"a"');
-                else
-                    assert('(User.' + property + ' = "a")', TypeError);
-
-        }
-        /**
-         * Validamos string
-         */
-        window.localStorage.clear();
-        for (var property in User) {
-            if (User.hasOwnProperty(property)) {
-                window.localStorage.setItem(property, '[]');
-            }
-        }
-        for (var property in User) {
-            if (User.hasOwnProperty(property)) {
-                if (property === 'weight' ||
-                    property === 'sex')
-                    assert('(User.' + property + ' = "a")', '"a"');
-                else
-                    assert('User.' + property, TypeError)
-            }
-        }
-
-
-
-
-
-
-
-
-
-         //window.localStorage.setItem('height', 1); assert(User.height == 1, 'User.height == 1');
-         //window.localStorage.setItem('physicalActivity', 1); assert(User.physicalActivity == 1, 'User.physicalActivity == 1');
-         //window.localStorage.setItem('initialDate', 1); try { User.initialDate } catch (e) { assert(e.toString() === new Error('window.localStorage.getItem(\'initialDate\') not Date').toString(), 'User.initialDate == 1') };
-         //window.localStorage.setItem('dateOfBirth', 1); try { User.dateOfBirth } catch (e) { assert(e.toString() === new Error('window.localStorage.getItem(\'dateOfBirth\') not Date').toString(), 'User.dateOfBirth == 1') };
-         //window.localStorage.setItem('age', 1); assert(User.age == 13, 'User.age == 13');
-         //window.localStorage.setItem('mes', 1); assert(+User.mes == +new Date(2014, 5 - 1, 5), 'User.+mes == +new Date(2014, 5 - 1, 5)');
-         //window.localStorage.setItem('months', 1); assert(User.months, 1, 'User.months, 1');
-         //window.localStorage.setItem('name', 1); assert(User.name, 1, 'User.name, 1');
-         //window.localStorage.setItem('weights', 1); assert(User.weights, 1, 'User.weights, 1');
-         //window.localStorage.setItem('lastMonthsMaximumWeight', 1); assert(User.lastMonthsMaximumWeight, 1, 'User.lastMonthsMaximumWeight, 1');
-         //window.localStorage.setItem('lastMonthsMinimumWeight', 1); assert(User.lastMonthsMinimumWeight, 1, 'User.lastMonthsMinimumWeight, 1');
-         //window.localStorage.setItem('weight', 1); assert(User.weight, 1, 'User.weight, 1');
-         //window.localStorage.setItem('bodyMassIndex', 1); assert(User.bodyMassIndex, 1, 'User.bodyMassIndex, 1');
-         //window.localStorage.setItem('week', 1); assert(User.week, 1, 'User.week, 1');
-         //window.localStorage.setItem('weeks', 1); assert(User.weeks, 1, 'User.weeks, 1');
-         //window.localStorage.setItem('seHaPesadoEstaSemana', 1); assert(User.seHaPesadoEstaSemana, 1, 'User.seHaPesadoEstaSemana, 1');
-         //window.localStorage.setItem('sex', 1); assert(User.sex, 1, 'User.sex, 1');
-         //window.localStorage.setItem('TMB', 1); assert(User.TMB, 1, 'User.TMB, 1');
-         //window.localStorage.setItem('dailyCaloricNeeds', 1); assert(User.dailyCaloricNeeds, 1, 'User.dailyCaloricNeeds, 1');
-         //window.localStorage.setItem('targetWeight', 1); assert(User.targetWeight, 1, 'User.targetWeight, 1');
-         //window.localStorage.setItem('targetWeights', 1); assert(User.targetWeights, 1, 'User.targetWeights, 1');
-         //window.localStorage.setItem('idealWeight', 1); assert(User.idealWeight, 1, 'User.idealWeight, 1');
-        /*window.localStorage.clear();
-        User.physicalActivity = 1;
-        assert(User.physicalActivity, 1, 'User.physicalActivity, 1');
-        User.height = 1.86;
-        assert(User.height, 1.86, 'User.height, 1.86');
-        User.initialDate = new Date(2014, 3 - 1, 21);
-        assert(+User.initialDate == +new Date(2014, 3 - 1, 21), 'User.+initialDate == +new Date(2014, 3 - 1, 21)');
-        User.dateOfBirth = new Date(1981, 10 - 1, 7);
-        assert(+User.dateOfBirth == +new Date(1981, 10 - 1, 7), 'User.+dateOfBirth == +new Date(1981, 10 - 1, 7)');
-        assert(User.age == 32, 'User.age == 32');
-        User.name = 'Jesús';
-        assert(User.name == 'Jesús', 'User.name == \'Jesús\'');
-        User.weights = [85, null, 83, null, 81, null, null];
-        assert(User.weights.compare([85, 85, 83, 83, 81, 81, 81]), 'User.weights.compare([85, 85, 83, 83, 81, 81])');
-        assert(User.seHaPesadoEstaSemana == false, 'User.seHaPesadoEstaSemana == false');
-        assert(User.weight == 81, 'User.weight == 81');
-        User.weight = 80;
-        assert(User.weight == 80, 'User.weight == 80');
-        assert(User.lastMonthsMaximumWeight == 81, 'User.lastMonthsMaximumWeight == 81');
-        assert(User.lastMonthsMinimumWeight == 80, 'User.lastMonthsMinimumWeight == 80');
-        assert(User.bodyMassIndex == 23.12406058503873, 'User.bodyMassIndex == 23.12406058503873');
-        assert(+User.week == +new Date(2014, 5 - 1, 9), '+User.week == +new Date(2014, 5 - 1, 9)');
-        assert(User.weeks.toString() == [
-            new Date(2014, 3 - 1, 21),
-            new Date(2014, 3 - 1, 28),
-            new Date(2014, 4 - 1, 4),
-            new Date(2014, 4 - 1, 11),
-            new Date(2014, 4 - 1, 18),
-            new Date(2014, 4 - 1, 25),
-            new Date(2014, 5 - 1, 2),
-            new Date(2014, 5 - 1, 9)
-        ].toString(), 'User.weeks.toString() == [' +
-            'new Date(2014, 3 - 1, 21),' +
-            'new Date(2014, 3 - 1, 28),' +
-            'new Date(2014, 4 - 1, 4),' +
-            'new Date(2014, 4 - 1, 11),' +
-            'new Date(2014, 4 - 1, 18),' +
-            'new Date(2014, 4 - 1, 25),' +
-            'new Date(2014, 5 - 1, 2)),' +
-            'new Date(2014, 5 - 1, 9)' +
-            '].toString()');
-        User.sex = 'Masculino';
-        assert(User.sex == 'Masculino', 'User.sex == \'Masculino\'');
-        assert(User.TMB == 1807.5, 'User.TMB == 1807.5');
-        assert(User.dailyCaloricNeeds == 2169, 'User.dailyCaloricNeeds == 2169');
-        assert(+User.mes == +new Date(2014, 4 - 1, 18), '+User.mes == new Date(2014, 4 - 1, 18)');
-        assert(User.months.toString() == [new Date(2014, 3 - 1, 21), new Date(2014, 4 - 1, 18)].toString(), 'User.months.toString() == [new Date(2014, 3 - 1, 21), new Date(2014, 4 - 1, 18)].toString()');
-        User.targetWeights = [80, null];
-        assert(User.targetWeights.compare([80, null]), 'User.targetWeights.compare([80, null])');
-        assert(User.targetWeight == 80, 'User.targetWeight == 80');
-        User.targetWeight = 78;
-        assert(User.targetWeight == 78, 'User.targetWeight == 78');
-        assert(User.idealWeight == 75.2463, 'User.idealWeight == 75.2463');*/
-    </script>
 </body>
 
 </html>

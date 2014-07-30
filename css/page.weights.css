@@ -2,16 +2,26 @@
     Pesos
 ==============================*/
 
-.page[data-page=weights] .icon {
-    width: 29px;
-    height: 29px;
-    border-radius: 20%;
-}
-.page[data-page=weights] .icon {
-    width: 29px;
-    height: 29px;
-    border-radius: 20%;
-}
 .page[data-page=weights] .list-block .swipeout-content {
     background: #FDE69F;
+}
+.page[data-page=weights] .icon {
+    width: 29px;
+    height: 29px;
+    border-radius: 20%;
+}
+.page[data-page=weights] .icon.bodyMassIndexRange.underweight {
+    background-color: #C2CD00;
+}
+.page[data-page=weights] .icon.bodyMassIndexRange.normal {
+    background-color: #00CD0F;
+}
+.page[data-page=weights] .icon.bodyMassIndexRange.overweight {
+    background-color: #CD6300;
+}
+.page[data-page=weights] .icon.bodyMassIndexRange.obese {
+    background-color: #CD0011;
+}
+.page[data-page=weights] .icon.bodyMassIndexRange.morbid {
+    background-color: #B000CD;
 }

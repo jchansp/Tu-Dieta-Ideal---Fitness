@@ -1,8 +1,8 @@
 /*==============================
-    Registro
+    Register
 ==============================*/
 
-.popup.registro .ks-demo-slider .slider-slide {
+.popup.register .ks-demo-slider .slider-slide {
     display: -webkit-box;
     display: -ms-flexbox;
     display: -webkit-flex;
@@ -17,30 +17,30 @@
     align-items: center;
     /*background:#fff;*/
 }
-.popup.registro .ks-demo-slider .slider-slide > div {
+.popup.register .ks-demo-slider .slider-slide > div {
     width: inherit;
 }
-.popup.registro .slider-pagination-active {
+.popup.register .slider-pagination-active {
     background: #53B021;
 }
-.popup.registro h1 {
+.popup.register h1 {
     text-indent: -9999px;
     width: 240px;
     height: 334px;
-    background-image: url(../img/registro.png);
+    background-image: url(../img/register.png);
     background-size: 100% auto;
     background-repeat: no-repeat;
     margin: 0 auto;
 }
-.popup.registro h1,
-.popup.registro h2 {
+.popup.register h1,
+.popup.register h2 {
     text-align: center;
 }
-.popup.registro h2 {
+.popup.register h2 {
     font-size: 25px;
     font-weight: 300;
 }
-.popup.registro .list-block input[type=number] {
+.popup.register .list-block input[type=number] {
     -webkit-appearance: none;
     -moz-appearance: none;
     -ms-appearance: none;
@@ -62,7 +62,7 @@
     font-size: 17px;
     font-family: inherit;
 }
-.popup.registro div[class*="col-"] {
+.popup.register div[class*="col-"] {
     border-radius: 50%;
     display: inline-block;
     position: relative;
@@ -70,14 +70,14 @@
     color: #FDE69F;
     visibility: hidden;
 }
-.popup.registro div[class*="col-"].bodyMassIndex {
+.popup.register div[class*="col-"].bodyMassIndex {
     visibility: inherit;
 }
-.popup.registro div[class*="col-"] div:first-child {
+.popup.register div[class*="col-"] div:first-child {
     margin-top: 100%;
 }
-.popup.registro div[class*="col-"] .numero,
-.popup.registro div[class*="col-"] .texto {
+.popup.register div[class*="col-"] .numero,
+.popup.register div[class*="col-"] .texto {
     position: absolute;
     top: 0;
     bottom: 0;
@@ -86,62 +86,62 @@
     width: 100%;
     text-align: center;
 }
-.popup.registro div[class*="col-"] .numero {
+.popup.register div[class*="col-"] .numero {
     font-weight: bold;
     font-size: 20px;
     font-size: 6.2vw;
     margin-top: 25%;
 }
-.popup.registro div[class*="col-"] .texto {
+.popup.register div[class*="col-"] .texto {
     font-size: 12px;
     font-size: 3.9vw;
     margin-top: 60%;
 }
-.popup.registro .icon {
+.popup.register .icon {
     width: 29px;
     height: 29px;
     border-radius: 20%;
     background-color: #21340C;
 }
-.popup.registro .icon.name {
+.popup.register .icon.name {
     background-image: url(../img/name.png);
 }
-.popup.registro .icon.sex {
+.popup.register .icon.sex {
     background-image: url(../img/sex.png);
 }
-.popup.registro .icon.dateOfBirth {
+.popup.register .icon.dateOfBirth {
     background-image: url(../img/dateOfBirth.png);
 }
-.popup.registro .icon.weight {
+.popup.register .icon.weight {
     background-image: url(../img/weight.png);
 }
-.popup.registro .icon.height {
+.popup.register .icon.height {
     background-image: url(../img/height.png);
 }
-.popup.registro .icon.physicalActivity {
+.popup.register .icon.physicalActivity {
     background-image: url(../img/physicalActivity.png);
 }
-.popup.registro .bodyMassIndex.saludable,
-.popup.registro .icon.saludable {
+.popup.register .bodyMassIndex.saludable,
+.popup.register .icon.saludable {
     background-color: #00CD0F;
 }
-.popup.registro .bodyMassIndex.delgado,
-.popup.registro .icon.delgado {
+.popup.register .bodyMassIndex.delgado,
+.popup.register .icon.delgado {
     background-color: #C2CD00;
 }
-.popup.registro .bodyMassIndex.sobrepeso,
-.popup.registro .icon.sobrepeso {
+.popup.register .bodyMassIndex.sobrepeso,
+.popup.register .icon.sobrepeso {
     background-color: #CD6300;
 }
-.popup.registro .bodyMassIndex.obeso,
-.popup.registro .icon.obeso {
+.popup.register .bodyMassIndex.obeso,
+.popup.register .icon.obeso {
     background-color: #CD0011;
 }
-.popup.registro .bodyMassIndex.morbido,
-.popup.registro .icon.morbido {
+.popup.register .bodyMassIndex.morbido,
+.popup.register .icon.morbido {
     background-color: #B000CD;
 }
-.popup.registro .button.active {
+.popup.register .button.active {
     background: #21340C;
     color: #FDE69F;
     border: 1px solid #21340C;

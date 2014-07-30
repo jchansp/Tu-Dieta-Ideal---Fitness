@@ -9,7 +9,7 @@ myApp.$(window).on('load', function () {
     /* Aqui entra al arrancar la aplicación */
     if (!myApp.User) {
         /* Si no tiene recogidos los datos del usuario */
-        myApp.popup($$('.popup.registro'));
+        myApp.popup($$('.popup.register'));
         myApp.slider('.slider-container', {
             pagination: '.slider-pagination'
         }).onSlideChangeEnd = function () {
@@ -23,14 +23,10 @@ myApp.$(window).on('load', function () {
                 }
             } else {
                 /* Si tiene datos de usuario */
-                /*
-                var weights = myApp.weights ? JSON.parse(window.localStorage.getItem('Pesos')) : [];
-                console.log(myApp.formGetData('User'));*/
-                $$('.weight .numero').html(myApp.User.weight);
+                $$('.weight .numero').html(myApp.weight);
                 $$('.bodyMassIndex .numero').html(myApp.bodyMassIndex);
                 $$('.bodyMassIndex').addClass(myApp.bodyMassIndexRange);
                 $$('.idealWeight .numero').html(myApp.idealWeight);
-
             }
         };
     }
@@ -43,15 +39,35 @@ myApp.$(window).on('load', function () {
     }*/
 });
 
-$$('#User').on('change', function () {
+//$$('.popup.register .name').on('change', function (e) {
+//    User.name = e.target.value;
+//});
+//$$('.popup.register .sex').on('change', function (e) {
+//    User.sex = e.target.value;
+//});
+//$$('.popup.register .dateOfBirth').on('change', function (e) {
+//    User.dateOfBirth = e.target.value;
+//});
+//$$('.popup.register .weight').on('change', function (e) {
+//    User.weight = e.target.value;
+//});
+//$$('.popup.register .height').on('change', function (e) {
+//    User.height = e.target.value;
+//});
+//$$('.popup.register .physicalActivity').on('change', function (e) {
+//    User.physicalActivity = e.target.value;
+//});
+$$('.popup.register').on('change', function () {
     /* Por cada cambio que se haga en el formulario, lo almacenamos en User, 
        incluída la initialDate */
-    var User = myApp.User;
-    User.initialDate = dateToJSON(new Date());
+    User.name = $$('.popup.register input.name').val();
+    User.sex = $$('.popup.register select.sex').val();
+    User.dateOfBirth = stringToDate($$('.popup.register input.dateOfBirth').val());
+    User.height = stringToNumber($$('.popup.register input.height').val());
+    User.physicalActivity = stringToNumber($$('.popup.register select.physicalActivity').val());
     User.weights = [{
-        id: (User.weights) ? User.weights[User.weights.length - 1].id : 1,
-        date: User.initialDate,
-        weight: User.initialWeight
-    }]
-    myApp.User = User;
+        id: newId(),
+        date: new Date(),
+        weight: stringToNumber($$('.popup.register input.weight').val())
+    }];
 });

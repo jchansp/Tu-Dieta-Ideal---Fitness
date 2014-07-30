@@ -3,7 +3,7 @@ $$(document).on('pageInit', function (e) {
     if (page.name === 'weights') {
         myApp.weights.forEach(function (weight, i) {
             $$('[data-page=weights] .list-block ul')[0].innerHTML +=
-                '<li class="swipeout">' +
+                '<li class="swipeout" data-id="' + weight.id + '">' +
             /*'<li>' +*/
             '    <div class="item-content swipeout-content">' +
             /*'    <div class="item-content">' +*/
@@ -18,6 +18,14 @@ $$(document).on('pageInit', function (e) {
                 '    </div>' +
                 '</li>';
         });
+        var html = '';
+        var template = $$('#weight-template').html();
+        for (var i = 0; i < myApp.weights.length; i++) {
+            var weight = myApp.weights[i];
+            html += template.replace(/{{id}}/g, weight.id).replace(/{{bodyMassIndexRange}}/g, bodyMassIndexRange(bodyMassIndex(weight.weight, myApp.height))).replace(/{{title}}/g, weight.weight).replace(/{{date}}/g, dateToJSON(weight.date));
+        }
+        $$('[data-page=weights] .list-block ul').html(html);
+
         /*if (User.weeks && User.weights && User.height) {
             User.weeks.forEach(function (week, i) {
                 var date = [(week.getDate() < 10) ? '0' + week.getDate() : week.getDate(),
@@ -102,36 +110,37 @@ $$(document).on('pageInit', function (e) {
                 return;
             }
             var color = $$('.popup .color.selected').attr('data-color');
-            todoData.push({
+            myApp.weights.push({
                 title: title,
                 color: color,
                 checked: '',
                 id: (new Date()).getTime()
             });
-            localStorage.td7Data = JSON.stringify(todoData);
+            localStorage.td7Data = JSON.stringify(myApp.weights);
             buildTodoListHtml();
             myApp.closeModal('.popup');
 
         });*/
-        $$('#demoform-2').on('change', 'input', function () {
-            var todoData;
-            var input = $$(this);
-            var checked = input[0].checked;
-            var id = input.parents('li').attr('data-id') * 1;
-            for (var i = 0; i < todoData.length; i++) {
-                if (todoData[i].id === id) todoData[i].checked = checked ? 'checked' : '';
-            }
-            localStorage.td7Data = JSON.stringify(todoData);
-        });
+        /*$$('#demoform-2').on('change', 'input', function () {
+    var myApp.weights;
+    var input = $$(this);
+    var checked = input[0].checked;
+    var id = input.parents('li').attr('data-id') * 1;
+    for (var i = 0; i < myApp.weights.length; i++) {
+        if (myApp.weights[i].id === id) myApp.weights[i].checked = checked ? 'checked' : '';
+    }
+    localStorage.td7Data = JSON.stringify(myApp.weights);
+});*/
         $$('[data-page=weights] .list-block ul').on('delete', '.swipeout', function () {
             var id = $$(this).attr('data-id') * 1;
             var index;
-            for (var i = 0; i < todoData.length; i++) {
-                if (todoData[i].id === id) index = i;
+            for (var i = 0; i < myApp.weights.length; i++) {
+                if (myApp.weights[i].id === id) index = i;
             }
             if (typeof (index) !== 'undefined') {
-                todoData.splice(index, 1);
-                localStorage.td7Data = JSON.stringify(todoData);
+                var weights = myApp.weights;
+                weights.splice(index, 1);
+                myApp.weights = weights;
             }
         });
     }

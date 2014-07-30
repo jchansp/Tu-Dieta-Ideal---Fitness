@@ -24,6 +24,21 @@
         <div class="page-content">
             <div class="content-block-title">Evolución de peso</div>
             <div class="list-block">
+                <!-- Template-->
+                <pre id="weight-template" type="template" style="display:none;">
+                    <li class="swipeout" data-id="{{id}}">
+                        <div class="item-content swipeout-content">
+                            <div class="item-media"><i class="icon bodyMassIndexRange {{bodyMassIndexRange}}"></i></div>
+                            <div class="item-inner">
+                                <div class="item-title">{{title}}</div>
+                                <div class="item-after">{{date}}</div>
+                            </div>
+                        </div>
+                        <div class="swipeout-actions">
+                            <div class="swipeout-actions-inner"><a href="#" data-confirm="¿Seguro que quiere borrar este peso?" class="swipeout-delete">Borrar</a></div>
+                        </div>
+                    </li>
+                </pre>
                 <!--<form id="demoform-2" class="store-data list-block">-->
                 <ul>
                     <!--<li>

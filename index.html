@@ -42,7 +42,7 @@
     <link rel="stylesheet" href="css/page.weights.css">
     <link rel="stylesheet" href="css/pages.css">
     <link rel="stylesheet" href="css/popup.weight.css">
-    <link rel="stylesheet" href="css/popup.registro.css">
+    <link rel="stylesheet" href="css/popup.register.css">
     <link rel="stylesheet" href="css/tabbar.css">
 </head>
 
@@ -265,7 +265,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="content-block-title">Evolución de weights</div>
+                        <div class="content-block-title">Evolución de pesos</div>
                         <a href="dietas.html">Dietas</a>
                         <div class="content-block">
                             <canvas id="canvas"></canvas>
@@ -522,9 +522,9 @@
             </div>
         </div>
     </div>
-    <div class="popup registro">
+    <div class="popup register">
         <div class="view navbar-fixed">
-            <div data-page="registro" class="page">
+            <div data-page="register" class="page">
                 <div data-pagination=".slider-pagination" class="slider-container slider-init ks-demo-slider">
                     <div class="slider-pagination"></div>
                     <div class="slider-wrapper">
@@ -545,106 +545,106 @@
                                 </div>
                                 <div class="content-block-title">Datos Personales</div>
                                 <div class="list-block">
-                                    <form id="User" class="store-data">
-                                        <!--<input name="initialDate" class="initialDate" type="hidden" />-->
-                                        <ul>
-                                            <li>
-                                                <div class="item-content">
-                                                    <div class="item-media">
-                                                        <i class="icon name"></i>
+                                    <!--<form id="User" class="store-data">-->
+                                    <!--<input name="initialDate" class="initialDate" type="hidden" />-->
+                                    <ul>
+                                        <li>
+                                            <div class="item-content">
+                                                <div class="item-media">
+                                                    <i class="icon name"></i>
+                                                </div>
+                                                <div class="item-inner">
+                                                    <div class="item-title label">Nombre</div>
+                                                    <div class="item-input">
+                                                        <input name="name" class="name" type="text" placeholder="Tu nombre" />
                                                     </div>
-                                                    <div class="item-inner">
-                                                        <div class="item-title label">Nombre</div>
-                                                        <div class="item-input">
-                                                            <input name="name" class="name" type="text" placeholder="Tu nombre" />
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="item-content">
+                                                <div class="item-media">
+                                                    <i class="icon sex"></i>
+                                                </div>
+                                                <div class="item-inner">
+                                                    <div class="item-title label">Sexo</div>
+                                                    <div class="item-input">
+                                                        <select name="sex" class="sex">
+                                                            <option>Masculino</option>
+                                                            <option>Femenino</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="item-content">
+                                                <div class="item-media">
+                                                    <i class="icon dateOfBirth"></i>
+                                                </div>
+                                                <div class="item-inner">
+                                                    <div class="item-title label">Fec. nac.</div>
+                                                    <div class="item-input">
+                                                        <input name="dateOfBirth" class="dateOfBirth" type="date" placeholder="Fec. nac." value="1990-01-01" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="item-content">
+                                                <div class="item-media">
+                                                    <i class="icon weight"></i>
+                                                </div>
+                                                <div class="item-inner">
+                                                    <div class="item-title label">Peso (kg.)
+                                                    </div>
+                                                    <div class="item-input">
+                                                        <div class="range-slider">
+                                                            <!--<input name="weight" type="range" min="45" max="120" value="65" step="1" />-->
+                                                            <input name="weight" class="weight" type="number" min="45" max="120" value="65" step="5" />
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </li>
-                                            <li>
-                                                <div class="item-content">
-                                                    <div class="item-media">
-                                                        <i class="icon sex"></i>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="item-content">
+                                                <div class="item-media">
+                                                    <i class="icon height"></i>
+                                                </div>
+                                                <div class="item-inner">
+                                                    <div class="item-title label">Alto (m.)
                                                     </div>
-                                                    <div class="item-inner">
-                                                        <div class="item-title label">Sexo</div>
-                                                        <div class="item-input">
-                                                            <select name="sex">
-                                                                <option>Masculino</option>
-                                                                <option>Femenino</option>
-                                                            </select>
+                                                    <div class="item-input">
+                                                        <div class="range-slider">
+                                                            <!--<input name="height" type="range" min="1.45" max="2.1" value="1.7" step="0.01" />-->
+                                                            <input name="height" class="height" type="number" min="1.45" max="2.1" value="1.7" step="0.01" />
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </li>
-                                            <li>
-                                                <div class="item-content">
-                                                    <div class="item-media">
-                                                        <i class="icon dateOfBirth"></i>
-                                                    </div>
-                                                    <div class="item-inner">
-                                                        <div class="item-title label">Fec. nac.</div>
-                                                        <div class="item-input">
-                                                            <input name="dateOfBirth" type="date" placeholder="Fec. nac." value="1990-01-01" />
-                                                        </div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="item-content">
+                                                <div class="item-media">
+                                                    <i class="icon physicalActivity"></i>
+                                                </div>
+                                                <div class="item-inner">
+                                                    <div class="item-title label">Actividad</div>
+                                                    <div class="item-input">
+                                                        <select name="physicalActivity" class="physicalActivity">
+                                                            <option value="1">Poco o ningún ejercicio</option>
+                                                            <option value="2">Ejercicio ligero (1-3 días a la semana)</option>
+                                                            <option value="3">Ejercicio moderado (3-5 días a la semana)</option>
+                                                            <option value="4">Ejercicio fuerte (6-7 días a la semana)</option>
+                                                            <option value="5">Ejercicio muy fuerte (dos veces al día, entrenamientos muy duros)</option>
+                                                        </select>
                                                     </div>
                                                 </div>
-                                            </li>
-                                            <li>
-                                                <div class="item-content">
-                                                    <div class="item-media">
-                                                        <i class="icon weight"></i>
-                                                    </div>
-                                                    <div class="item-inner">
-                                                        <div class="item-title label">Peso (kg.)
-                                                        </div>
-                                                        <div class="item-input">
-                                                            <div class="range-slider">
-                                                                <!--<input name="weight" type="range" min="45" max="120" value="65" step="1" />-->
-                                                                <input name="initialWeight" type="number" min="45" max="120" value="65" step="5" />
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <div class="item-content">
-                                                    <div class="item-media">
-                                                        <i class="icon height"></i>
-                                                    </div>
-                                                    <div class="item-inner">
-                                                        <div class="item-title label">Alto (m.)
-                                                        </div>
-                                                        <div class="item-input">
-                                                            <div class="range-slider">
-                                                                <!--<input name="height" type="range" min="1.45" max="2.1" value="1.7" step="0.01" />-->
-                                                                <input name="height" type="number" min="1.45" max="2.1" value="1.7" step="0.01" />
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <div class="item-content">
-                                                    <div class="item-media">
-                                                        <i class="icon physicalActivity"></i>
-                                                    </div>
-                                                    <div class="item-inner">
-                                                        <div class="item-title label">Actividad</div>
-                                                        <div class="item-input">
-                                                            <select name="physicalActivity">
-                                                                <option value="1">Poco o ningún ejercicio</option>
-                                                                <option value="2">Ejercicio ligero (1-3 días a la semana)</option>
-                                                                <option value="3">Ejercicio moderado (3-5 días a la semana)</option>
-                                                                <option value="4">Ejercicio fuerte (6-7 días a la semana)</option>
-                                                                <option value="5">Ejercicio muy fuerte (dos veces al día, entrenamientos muy duros)</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                        </ul>
-                                    </form>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                    <!--</form>-->
                                 </div>
                             </div>
                         </div>
@@ -844,15 +844,15 @@
     <script type="text/javascript" src="js/Array.js"></script>
     <script type="text/javascript" src="js/Chart.min.js"></script>
     <!--<script type="text/javascript" src="js/Date.js"></script>-->
-    <!--<script type="text/javascript" src="js/User.js"></script>-->
     <script type="text/javascript" src="js/app.js"></script>
     <script type="text/javascript" src="js/app.properties.js"></script>
     <script type="text/javascript" src="js/functions.js"></script>
-    <script type="text/javascript" src="js/page.home.js"></script>
+    <!--<script type="text/javascript" src="js/page.home.js"></script>-->
     <script type="text/javascript" src="js/page.weights.js"></script>
     <script type="text/javascript" src="js/popup.weight.js"></script>
-    <script type="text/javascript" src="js/popup.registro.js"></script>
+    <script type="text/javascript" src="js/popup.register.js"></script>
     <script type="text/javascript" src="js/tab.home.js"></script>
+    <script type="text/javascript" src="js/User.js"></script>
 </body>
 
 </html>

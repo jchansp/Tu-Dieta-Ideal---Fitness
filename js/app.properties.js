@@ -23,7 +23,7 @@ Object.defineProperty(myApp, 'height', {
 //});
 Object.defineProperty(myApp, 'bodyMassIndex', {
     get: function () {
-        if (this.weight && this.height) return round(this.weight / Math.pow(this.height, 2));
+        return bodyMassIndex(this.weight, this.height);
     }
 });
 Object.defineProperty(myApp, 'weight', {
