@@ -1,23 +1,26 @@
+<!DOCTYPE html>
 <html>
 
 <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>TDI+F</title>
+    <link rel="stylesheet" href="css/app.css">
     <script>
         (function () {
             'use strict';
 
-            var assert = function (unitTest, comparison) {
-                document.writeln('<tr>');
-                document.writeln('<td>' + unitTest + '</td>');
-                document.writeln('<td>' + (eval(comparison) ? '<span style="color:blue">OK</span>' : '<span style="color:red">KO</span>') + '</td>');
-                document.writeln('</tr>');
-            };
-
-            function areEqual(object1, object2) {
-                return JSON.stringify(object1) === JSON.stringify(object2);
-            };
-
+            MyError = function (message) {
+                this.name = 'MyError';
+                this.message = message || 'dateOfBirth has to be a Date';
+            }
+            MyError.prototype = new TypeError();
+            MyError.prototype.constructor = MyError;
             window.User = {};
-            User.BLL = function (_User) {
+            User.BLL = function (_this) {
                 /**
                  * Private functions
                  */
@@ -37,56 +40,76 @@
                  * Getters & Setters
                  */
                 this.__defineGetter__('dateOfBirth', function () {
-                    return _User.dateOfBirth;
+                    return _this.dateOfBirth;
                 });
                 this.__defineSetter__('dateOfBirth', function (dateOfBirth) {
-                    if (!isDate(_User.dateOfBirth))
-                        throw new TypeError('dateOfBirth has to be a Date');
+                    if (!dateOfBirth || !isDate(dateOfBirth))
+                        throw new MyError();
+                    _this.dateOfBirth = dateOfBirth;
                 });
                 this.__defineGetter__('height', function () {
-                    return _User.height;
+                    return _this.height;
                 });
                 this.__defineSetter__('height', function (height) {
-                    if (!isNumber(_User.height))
+                    if (!height || !isNumber(height))
                         throw new TypeError('height has to be a Number');
+                    _this.height = height;
                 });
                 this.__defineGetter__('name', function () {
-                    return _User.name;
+                    return _this.name;
                 });
                 this.__defineSetter__('name', function (name) {
-                    if (!isString(_User.name))
+                    if (!name || !isString(name))
                         throw new TypeError('name has to be a String');
+                    _this.name = name;
                 });
                 this.__defineGetter__('physicalActivity', function () {
-                    return _User.physicalActivity;
+                    return _this.physicalActivity;
                 });
                 this.__defineSetter__('physicalActivity', function (physicalActivity) {
-                    if (!isNumber(_User.physicalActivity))
-                        throw new TypeError('physicalActivity∫ has to be a Number');
+                    if (!physicalActivity || !isNumber(physicalActivity))
+                        throw new TypeError('physicalActivity has to be a Number');
+                    if (physicalActivity < 1 || physicalActivity > 5)
+                        throw new RangeError('physicalActivity has to be between 1 and 5');
+                    _this.physicalActivity = physicalActivity;
                 });
                 this.__defineGetter__('sex', function () {
-                    return _User.sex;
+                    return _this.sex;
                 });
                 this.__defineSetter__('sex', function (sex) {
-                    if (!isString(_User.sex))
+                    if (!sex || !isString(sex))
                         throw new TypeError('sex has to be a String');
+                    if (sex !== 'Masculino' && sex !== 'Femenino')
+                        throw new RangeError('sex has to be "Masculino" or "Femenino"');
+                    _this.sex = sex;
                 });
                 this.__defineGetter__('weights', function () {
-                    return _User.weights;
+                    return _this.weights;
                 });
                 this.__defineSetter__('weights', function (weights) {
-                    if (!isArray(_User.weights))
+                    if (!weights || !isArray(weights))
                         throw new TypeError('weights has to be an Array');
+                    if (weights.length === 0)
+                        throw new RangeError('weights has to have at least one item');
+                    weights.forEach(function (weight) {
+                        if (!weight.id || !isNumber(weight.id))
+                            throw new TypeError('weight.id has to be a Number');
+                        if (!weight.date || !isDate(weight.date))
+                            throw new TypeError('weight.date has to be a Date');
+                        if (!weight.weight || !isNumber(weight.weight))
+                            throw new TypeError('weight.weight has to be a Number');
+                    });
+                    _this.weights = weights;
                 });
                 /**
                  * Constructor
                  */
-                this.dateOfBirth = _User.dateOfBirth;
-                this.height = _User.height;
-                this.name = _User.name;
-                this.physicalActivity = _User.physicalActivity;
-                this.sex = _User.sex;
-                this.weights = _User.weights;
+                this.dateOfBirth = _this.dateOfBirth;
+                this.height = _this.height;
+                this.name = _this.name;
+                this.physicalActivity = _this.physicalActivity;
+                this.sex = _this.sex;
+                this.weights = _this.weights;
             };
 
             /*User.DAL = function (dateOfBirth,
@@ -103,13 +126,24 @@
                 this.weights = isArray(weights) ? weights : undefined;
             };*/
 
-            window.addEventListener('load', function () {
+            window.addEventListener('DOMContentLoaded', function () {
+                var content = '';
+                var assert = function (unitTest, comparison) {
+                    content += '<tr>';
+                    content += '<td>' + unitTest + '</td>';
+                    content += '<td>' + (eval(comparison) ? '<span style="color:blue">OK</span>' : '<span style="color:red">KO</span>') + '</td>';
+                    content += '</tr>';
+                };
+
+                var areEqual = function (object1, object2) {
+                    return JSON.stringify(object1) === JSON.stringify(object2);
+                };
 
                 localStorage.clear();
-                document.writeln('<table>');
-                document.writeln('<tr>');
-                document.writeln('<th colspan=2>User.BLL.Getters</th>');
-                document.writeln('</tr>');
+                content += '<table>';
+                content += '<tr>';
+                content += '<th colspan=2>User.BLL.Getters</th>';
+                content += '</tr>';
                 window.userBll = new User.BLL({
                     dateOfBirth: new Date(1981, 10 - 1, 7),
                     height: 1.86,
@@ -122,19 +156,69 @@
                         weight: 82.2
                     }]
                 });
-                assert("dateOfBirth = 7/10/81", "areEqual(userBll.dateOfBirth, new Date(1981, 10 - 1, 7))");
-                assert("height = 1.86;", "areEqual(userBll.height, 1.86)");
-                assert("name = Jesús;", "areEqual(userBll.name, 'Jesús')");
-                assert("physicalActivity = 'Jesús'", "areEqual(userBll.physicalActivity, 1)");
-                assert("sex = 'Masculino'", "areEqual(userBll.sex, 'Masculino')");
-                assert("weights = [{id: 1, date: 1/1/2014, weight: 82.2}]", "areEqual(userBll.weights, [{id: 1, date: new Date(2014, 1 - 1, 1), weight: 82.2}])");
-                document.writeln('</table>');
+                assert("dateOfBirth = 7/10/81",
+                    "areEqual(userBll.dateOfBirth, new Date(1981, 10 - 1, 7))");
+                assert("height = 1.86;",
+                    "areEqual(userBll.height, 1.86)");
+                assert("name = Jesús;",
+                    "areEqual(userBll.name, 'Jesús')");
+                assert("physicalActivity = 'Jesús'",
+                    "areEqual(userBll.physicalActivity, 1)");
+                assert("sex = 'Masculino'",
+                    "areEqual(userBll.sex, 'Masculino')");
+                assert("weights = [{id: 1, date: 1/1/2014, weight: 82.2}]",
+                    "areEqual(userBll.weights, [{id: 1, date: new Date(2014, 1 - 1, 1), weight: 82.2}])");
+                try {
+                    userBll.dateOfBirth = null;
+                    assert("dateOfBirth = null", false);
+                } catch (e) {
+                    assert("dateOfBirth = null",
+                        "areEqual('" + e.toString() + "', new MyError().toString())");
+                };
+                try {
+                    userBll.height = null;
+                    assert("height = null", false);
+                } catch (e) {
+                    assert("height = null",
+                        "areEqual('" + e.toString() + "', new TypeError('height has to be a Number').toString())");
+                };
+                try {
+                    userBll.name = null;
+                    assert("name = null", false);
+                } catch (e) {
+                    assert("name = null",
+                        "areEqual('" + e.toString() + "', new TypeError('name has to be a String').toString())");
+                };
+                try {
+                    userBll.physicalActivity = null;
+                    assert("physicalActivity = null", false);
+                } catch (e) {
+                    assert("physicalActivity = null",
+                        "areEqual('" + e.toString() + "', new TypeError('physicalActivity has to be a Number').toString())");
+                };
+                try {
+                    userBll.sex = null;
+                    assert("sex = null", false);
+                } catch (e) {
+                    assert("sex = null",
+                        "areEqual('" + e.toString() + "', new TypeError('sex has to be a String').toString())");
+                };
+                try {
+                    userBll.weights = null;
+                    assert("weights = null", false);
+                } catch (e) {
+                    assert("weights = null",
+                        "areEqual('" + e.toString() + "', new TypeError('weights has to be an Array').toString())");
+                };
+                content += '</table>';
+                document.getElementById('container').innerHTML = content;
             });
         })();
     </script>
 </head>
 
 <body>
+    <div id="container"></div>
 </body>
 
 </html>
