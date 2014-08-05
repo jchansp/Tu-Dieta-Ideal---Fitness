@@ -8,7 +8,6 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <title>TDI+F</title>
-    <link rel="stylesheet" href="css/app.css">
     <script>
         (function () {
             'use strict';
@@ -31,6 +30,13 @@
                 /**
                  * Private functions
                  */
+                var getAge = function (dateOfBirth) {
+                    var now = new Date();
+                    return Math.floor((now.getTime() - dateOfBirth.getTime()) / (1000 * 60 * 60 * 24 * 365.25));
+                };
+                var getBasalMetabolicRate = function (weight, height, age, sex) {
+                    return (10 * weight) + (6.25 * height * 100) - (5 * age) + ((sex === 'Masculino') ? 5 : -161);
+                }
                 var isArray = function (array) {
                     return Object.prototype.toString.call(array) === '[object Array]';
                 };
@@ -47,8 +53,10 @@
                  * Getters & Setters
                  */
                 this.__defineGetter__('age', function () {
-                    var now = new Date();
-                    return Math.floor((now.getTime() - _dateOfBirth.getTime()) / (1000 * 60 * 60 * 24 * 365.25));
+                    return getAge(this.dateOfBirth);
+                });
+                this.__defineGetter__('basalMetabolicRate', function () {
+                    return getBasalMetabolicRate(this.weight, this.height, this.age, this.sex);
                 });
                 this.__defineGetter__('dateOfBirth', function () {
                     return _dateOfBirth;
@@ -93,6 +101,10 @@
                     if (sex !== 'Masculino' && sex !== 'Femenino')
                         throw new RangeError('sex has to be "Masculino" or "Femenino"');
                     _sex = sex;
+                });
+                this.__defineGetter__('weight', function () {
+                    if (this.weights && this.weights.length > 0)
+                        return this.weights[this.weights.length - 1].weight;
                 });
                 this.__defineGetter__('weights', function () {
                     return _weights;
@@ -193,7 +205,8 @@
                 assert("targetWeights = TODO", false);
                 assert("week = TODO", false);
                 assert("weeks = TODO", false);
-                assert("weight = TODO", false);
+                assert("weight = 82.2",
+                    "areEqual(userBll.weight, 82.2)");
                 assert("weights = [{id: 1, date: 1/1/2014, weight: 82.2}]",
                     "areEqual(userBll.weights, [{id: 1, date: new Date(2014, 1 - 1, 1), weight: 82.2}])");
                 try {
