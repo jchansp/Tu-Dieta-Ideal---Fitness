@@ -19,7 +19,7 @@
             }
             MyError.prototype = new TypeError();
             MyError.prototype.constructor = MyError;
-            
+
             window.User = {};
             User.BLL = function (_User) {
                 var _dateOfBirth;
@@ -46,6 +46,10 @@
                 /**
                  * Getters & Setters
                  */
+                this.__defineGetter__('age', function () {
+                    var now = new Date();
+                    return Math.floor((now.getTime() - _dateOfBirth.getTime()) / (1000 * 60 * 60 * 24 * 365.25));
+                });
                 this.__defineGetter__('dateOfBirth', function () {
                     return _dateOfBirth;
                 });
@@ -163,16 +167,33 @@
                         weight: 82.2
                     }]
                 });
+                assert("age = 32",
+                    "areEqual(userBll.age, 32)");
+                assert("basalMetabolicRate = TODO", false);
+                assert("bodyMassIndex = TODO", false);
                 assert("dateOfBirth = 7/10/81",
                     "areEqual(userBll.dateOfBirth, new Date(1981, 10 - 1, 7))");
+                assert("dailyCaloricNeeds = TODO", false);
                 assert("height = 1.86;",
                     "areEqual(userBll.height, 1.86)");
+                assert("idealWeight = TODO", false);
+                assert("lastMonthsMaximumWeight = TODO", false);
+                assert("lastMonthsMinimumWeight = TODO", false);
+                assert("month = TODO", false);
+                assert("months = TODO", false);
                 assert("name = Jesús;",
                     "areEqual(userBll.name, 'Jesús')");
                 assert("physicalActivity = 'Jesús'",
                     "areEqual(userBll.physicalActivity, 1)");
-                assert("sex = 'Masculino'",
+                assert("sex = Masculino",
                     "areEqual(userBll.sex, 'Masculino')");
+                assert("startingDate = 1/1/2014",
+                    "areEqual(userBll.startingDate, new Date(2014, 1 - 1, 1))");
+                assert("targetWeight = TODO", false);
+                assert("targetWeights = TODO", false);
+                assert("week = TODO", false);
+                assert("weeks = TODO", false);
+                assert("weight = TODO", false);
                 assert("weights = [{id: 1, date: 1/1/2014, weight: 82.2}]",
                     "areEqual(userBll.weights, [{id: 1, date: new Date(2014, 1 - 1, 1), weight: 82.2}])");
                 try {
