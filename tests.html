@@ -13,14 +13,21 @@
         (function () {
             'use strict';
 
-            MyError = function (message) {
+            window.MyError = function (message) {
                 this.name = 'MyError';
                 this.message = message || 'dateOfBirth has to be a Date';
             }
             MyError.prototype = new TypeError();
             MyError.prototype.constructor = MyError;
+            
             window.User = {};
-            User.BLL = function (_this) {
+            User.BLL = function (_User) {
+                var _dateOfBirth;
+                var _height;
+                var _name;
+                var _physicalActivity;
+                var _sex;
+                var _weights;
                 /**
                  * Private functions
                  */
@@ -40,51 +47,51 @@
                  * Getters & Setters
                  */
                 this.__defineGetter__('dateOfBirth', function () {
-                    return _this.dateOfBirth;
+                    return _dateOfBirth;
                 });
                 this.__defineSetter__('dateOfBirth', function (dateOfBirth) {
                     if (!dateOfBirth || !isDate(dateOfBirth))
                         throw new MyError();
-                    _this.dateOfBirth = dateOfBirth;
+                    _dateOfBirth = dateOfBirth;
                 });
                 this.__defineGetter__('height', function () {
-                    return _this.height;
+                    return _height;
                 });
                 this.__defineSetter__('height', function (height) {
                     if (!height || !isNumber(height))
                         throw new TypeError('height has to be a Number');
-                    _this.height = height;
+                    _height = height;
                 });
                 this.__defineGetter__('name', function () {
-                    return _this.name;
+                    return _name;
                 });
                 this.__defineSetter__('name', function (name) {
                     if (!name || !isString(name))
                         throw new TypeError('name has to be a String');
-                    _this.name = name;
+                    _name = name;
                 });
                 this.__defineGetter__('physicalActivity', function () {
-                    return _this.physicalActivity;
+                    return _physicalActivity;
                 });
                 this.__defineSetter__('physicalActivity', function (physicalActivity) {
                     if (!physicalActivity || !isNumber(physicalActivity))
                         throw new TypeError('physicalActivity has to be a Number');
                     if (physicalActivity < 1 || physicalActivity > 5)
                         throw new RangeError('physicalActivity has to be between 1 and 5');
-                    _this.physicalActivity = physicalActivity;
+                    _physicalActivity = physicalActivity;
                 });
                 this.__defineGetter__('sex', function () {
-                    return _this.sex;
+                    return _sex;
                 });
                 this.__defineSetter__('sex', function (sex) {
                     if (!sex || !isString(sex))
                         throw new TypeError('sex has to be a String');
                     if (sex !== 'Masculino' && sex !== 'Femenino')
                         throw new RangeError('sex has to be "Masculino" or "Femenino"');
-                    _this.sex = sex;
+                    _sex = sex;
                 });
                 this.__defineGetter__('weights', function () {
-                    return _this.weights;
+                    return _weights;
                 });
                 this.__defineSetter__('weights', function (weights) {
                     if (!weights || !isArray(weights))
@@ -99,17 +106,17 @@
                         if (!weight.weight || !isNumber(weight.weight))
                             throw new TypeError('weight.weight has to be a Number');
                     });
-                    _this.weights = weights;
+                    _weights = weights;
                 });
                 /**
                  * Constructor
                  */
-                this.dateOfBirth = _this.dateOfBirth;
-                this.height = _this.height;
-                this.name = _this.name;
-                this.physicalActivity = _this.physicalActivity;
-                this.sex = _this.sex;
-                this.weights = _this.weights;
+                this.dateOfBirth = _User.dateOfBirth;
+                this.height = _User.height;
+                this.name = _User.name;
+                this.physicalActivity = _User.physicalActivity;
+                this.sex = _User.sex;
+                this.weights = _User.weights;
             };
 
             /*User.DAL = function (dateOfBirth,
