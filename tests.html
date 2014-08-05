@@ -20,6 +20,16 @@
             MyError.prototype.constructor = MyError;
 
             window.User = {};
+            /**
+             * Enumerations
+             */
+            User.SEXES = {
+                MALE: 1,
+                FEMALE: 2
+            };
+            /**
+             * Classes
+             */
             User.BLL = function (_User) {
                 var _dateOfBirth;
                 var _height;
@@ -35,7 +45,7 @@
                     return Math.floor((now.getTime() - dateOfBirth.getTime()) / (1000 * 60 * 60 * 24 * 365.25));
                 };
                 var getBasalMetabolicRate = function (weight, height, age, sex) {
-                    return (10 * weight) + (6.25 * height * 100) - (5 * age) + ((sex === 'Masculino') ? 5 : -161);
+                    return (10 * weight) + (6.25 * height * 100) - (5 * age) + ((sex === User.SEXES.MALE) ? 5 : -161);
                 }
                 var isArray = function (array) {
                     return Object.prototype.toString.call(array) === '[object Array]';
@@ -48,6 +58,16 @@
                 };
                 var isString = function (string) {
                     return Object.prototype.toString.call(string) === '[object String]';
+                };
+                var objectHasAValue = function (object, value) {
+                    for (var property in object) {
+                        if (object.hasOwnProperty(property)) {
+                            if (object[property] === value) {
+                                return true;
+                            }
+                        }
+                    }
+                    return false;
                 };
                 /**
                  * Getters & Setters
@@ -96,10 +116,10 @@
                     return _sex;
                 });
                 this.__defineSetter__('sex', function (sex) {
-                    if (!sex || !isString(sex))
-                        throw new TypeError('sex has to be a String');
-                    if (sex !== 'Masculino' && sex !== 'Femenino')
-                        throw new RangeError('sex has to be "Masculino" or "Femenino"');
+                    if (!sex || !isNumber(sex))
+                        throw new TypeError('sex has to be a Number');
+                    if (!objectHasAValue(User.SEXES, sex))
+                        throw new RangeError('sex must have a value defined in the User.SEXES enumeration');
                     _sex = sex;
                 });
                 this.__defineGetter__('weight', function () {
@@ -172,7 +192,7 @@
                     height: 1.86,
                     name: 'Jesús',
                     physicalActivity: 1,
-                    sex: 'Masculino',
+                    sex: User.SEXES.MALE,
                     weights: [{
                         id: 1,
                         date: new Date(2014, 1 - 1, 1),
@@ -181,7 +201,8 @@
                 });
                 assert("age = 32",
                     "areEqual(userBll.age, 32)");
-                assert("basalMetabolicRate = TODO", false);
+                assert("basalMetabolicRate = 1829.5",
+                    "areEqual(userBll.basalMetabolicRate, 1829.5)");
                 assert("bodyMassIndex = TODO", false);
                 assert("dateOfBirth = 7/10/81",
                     "areEqual(userBll.dateOfBirth, new Date(1981, 10 - 1, 7))");
@@ -197,8 +218,8 @@
                     "areEqual(userBll.name, 'Jesús')");
                 assert("physicalActivity = 'Jesús'",
                     "areEqual(userBll.physicalActivity, 1)");
-                assert("sex = Masculino",
-                    "areEqual(userBll.sex, 'Masculino')");
+                assert("sex = User.SEXES.MALE",
+                    "areEqual(userBll.sex, User.SEXES.MALE)");
                 assert("startingDate = 1/1/2014",
                     "areEqual(userBll.startingDate, new Date(2014, 1 - 1, 1))");
                 assert("targetWeight = TODO", false);
@@ -242,7 +263,7 @@
                     assert("sex = null", false);
                 } catch (e) {
                     assert("sex = null",
-                        "areEqual('" + e.toString() + "', new TypeError('sex has to be a String').toString())");
+                        "areEqual('" + e.toString() + "', new TypeError('sex has to be a Number').toString())");
                 };
                 try {
                     userBll.weights = null;
