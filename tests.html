@@ -45,7 +45,10 @@
                     return Math.floor((now.getTime() - dateOfBirth.getTime()) / (1000 * 60 * 60 * 24 * 365.25));
                 };
                 var getBasalMetabolicRate = function (weight, height, age, sex) {
-                    return (10 * weight) + (6.25 * height * 100) - (5 * age) + ((sex === User.SEXES.MALE) ? 5 : -161);
+                    return round((10 * weight) + (6.25 * height * 100) - (5 * age) + ((sex === User.SEXES.MALE) ? 5 : -161));
+                }
+                var getBodyMassIndex = function (weight, height) {
+                    return round(weight / Math.pow(height, 2));
                 }
                 var isArray = function (array) {
                     return Object.prototype.toString.call(array) === '[object Array]';
@@ -69,6 +72,9 @@
                     }
                     return false;
                 };
+                var round = function (number) {
+                    return Math.round(number * 100) / 100;
+                };
                 /**
                  * Getters & Setters
                  */
@@ -77,6 +83,9 @@
                 });
                 this.__defineGetter__('basalMetabolicRate', function () {
                     return getBasalMetabolicRate(this.weight, this.height, this.age, this.sex);
+                });
+                this.__defineGetter__('bodyMassIndex', function () {
+                    return getBodyMassIndex(this.weight, this.height);
                 });
                 this.__defineGetter__('dateOfBirth', function () {
                     return _dateOfBirth;
@@ -203,7 +212,8 @@
                     "areEqual(userBll.age, 32)");
                 assert("basalMetabolicRate = 1829.5",
                     "areEqual(userBll.basalMetabolicRate, 1829.5)");
-                assert("bodyMassIndex = TODO", false);
+                assert("bodyMassIndex = 23.76",
+                    "areEqual(userBll.bodyMassIndex, 23.76)");
                 assert("dateOfBirth = 7/10/81",
                     "areEqual(userBll.dateOfBirth, new Date(1981, 10 - 1, 7))");
                 assert("dailyCaloricNeeds = TODO", false);
