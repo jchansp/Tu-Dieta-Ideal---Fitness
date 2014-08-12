@@ -57,26 +57,26 @@
                 var getBodyMassIndex = function (weight, height) {
                     return round(weight / Math.pow(height, 2));
                 }
-                var getdailyCaloricNeeds = function (physicalActivity) {
-                    var calorias;
+                var getDailyCaloricNeeds = function (physicalActivity, basalMetabolicRate) {
+                    var calories;
                     switch (physicalActivity) {
-                    case 1: // Little to no exercise
-                        calorias = this.TMB * 1.2;
+                    case User.PHYSICAL_ACTIVITIES.LITTLE_TO_NO:
+                        calories = basalMetabolicRate * 1.2;
                         break;
-                    case 2: // Ejercicio ligero (1-3 días a la week)
-                        calorias = this.TMB * 1.375;
+                    case User.PHYSICAL_ACTIVITIES.LIGHT:
+                        calories = basalMetabolicRate * 1.375;
                         break;
-                    case 3: // Ejercicio moderado (3-5 días a la week)
-                        calorias = this.TMB * 1.55;
+                    case User.PHYSICAL_ACTIVITIES.MODERATE:
+                        calories = basalMetabolicRate * 1.55;
                         break;
-                    case 4: // Ejercicio fuerte (6-7 días a la week)
-                        calorias = this.TMB * 1.725;
+                    case User.PHYSICAL_ACTIVITIES.HEAVY:
+                        calories = basalMetabolicRate * 1.725;
                         break;
-                    case 5: // Ejercicio muy fuerte (dos veces al día, entrenamientos muy duros)
-                        calorias = this.TMB * 1.9;
+                    case User.PHYSICAL_ACTIVITIES.VERY_HEAVY:
+                        calories = basalMetabolicRate * 1.9;
                         break;
                     }
-                    return calorias;
+                    return round(calories);
                 }
                 var isArray = function (array) {
                     return Object.prototype.toString.call(array) === '[object Array]';
@@ -114,6 +114,9 @@
                 });
                 this.__defineGetter__('bodyMassIndex', function () {
                     return getBodyMassIndex(this.weight, this.height);
+                });
+                this.__defineGetter__('dailyCaloricNeeds', function () {
+                    return getDailyCaloricNeeds(this.physicalActivity, this.basalMetabolicRate);
                 });
                 this.__defineGetter__('dateOfBirth', function () {
                     return _dateOfBirth;
@@ -242,9 +245,10 @@
                     "areEqual(userBll.basalMetabolicRate, 1829.5)");
                 assert("bodyMassIndex = 23.76",
                     "areEqual(userBll.bodyMassIndex, 23.76)");
+                assert("dailyCaloricNeeds = 2195.4",
+                    "areEqual(userBll.dailyCaloricNeeds, 2195.4)");
                 assert("dateOfBirth = 7/10/81",
                     "areEqual(userBll.dateOfBirth, new Date(1981, 10 - 1, 7))");
-                assert("dailyCaloricNeeds = TODO", false);
                 assert("height = 1.86;",
                     "areEqual(userBll.height, 1.86)");
                 assert("idealWeight = TODO", false);
