@@ -84,6 +84,9 @@
                     }
                     return round(calories);
                 }
+                var getIdealWeight = function (height) {
+                    return round(21.75 * Math.pow(height, 2));
+                }
                 var isArray = function (array) {
                     return Object.prototype.toString.call(array) === '[object Array]';
                 };
@@ -140,6 +143,21 @@
                         throw new TypeError('height has to be a Number');
                     _height = height;
                 });
+                this.__defineGetter__('idealWeight', function () {
+                    return getIdealWeight(this.height);
+                });
+                this.__defineGetter__('lastMonthsMaximumWeight', function () {
+                    throw new NotYetImplementedException();
+                });
+                this.__defineGetter__('lastMonthsMinimumWeight', function () {
+                    throw new NotYetImplementedException();
+                });
+                this.__defineGetter__('month', function () {
+                    throw new NotYetImplementedException();
+                });
+                this.__defineGetter__('months', function () {
+                    throw new NotYetImplementedException();
+                });
                 this.__defineGetter__('name', function () {
                     return _name;
                 });
@@ -167,6 +185,18 @@
                     if (!objectHasAValue(User.SEXES, sex))
                         throw new RangeError('sex must have a value defined in the User.SEXES enumeration');
                     _sex = sex;
+                });
+                this.__defineGetter__('targetWeight', function () {
+                    throw new NotYetImplementedException();
+                });
+                this.__defineGetter__('targetWeights', function () {
+                    throw new NotYetImplementedException();
+                });
+                this.__defineGetter__('week', function () {
+                    throw new NotYetImplementedException();
+                });
+                this.__defineGetter__('weeks', function () {
+                    throw new NotYetImplementedException();
                 });
                 this.__defineGetter__('weight', function () {
                     if (this.weights && this.weights.length > 0)
@@ -257,11 +287,36 @@
                     "areEqual(userBll.dateOfBirth, new Date(1981, 10 - 1, 7))");
                 assert("height = 1.86;",
                     "areEqual(userBll.height, 1.86)");
-                assert("idealWeight = TODO", false);
-                assert("lastMonthsMaximumWeight = TODO", false);
-                assert("lastMonthsMinimumWeight = TODO", false);
-                assert("month = TODO", false);
-                assert("months = TODO", false);
+                assert("idealWeight = 75.25;",
+                    "areEqual(userBll.idealWeight, 75.25)");
+                try {
+                    userBll.lastMonthsMaximumWeight;
+                    assert("lastMonthsMaximumWeight = TODO", false);
+                } catch (e) {
+                    assert("lastMonthsMaximumWeight = TODO",
+                        "areEqual('" + e.toString() + "', new NotYetImplementedException().toString())");
+                };
+                try {
+                    userBll.lastMonthsMinimumWeight;
+                    assert("lastMonthsMinimumWeight = TODO", false);
+                } catch (e) {
+                    assert("lastMonthsMinimumWeight = TODO",
+                        "areEqual('" + e.toString() + "', new NotYetImplementedException().toString())");
+                };
+                try {
+                    userBll.month;
+                    assert("month = TODO", false);
+                } catch (e) {
+                    assert("month = TODO",
+                        "areEqual('" + e.toString() + "', new NotYetImplementedException().toString())");
+                };
+                try {
+                    userBll.months;
+                    assert("months = TODO", false);
+                } catch (e) {
+                    assert("months = TODO",
+                        "areEqual('" + e.toString() + "', new NotYetImplementedException().toString())");
+                };
                 assert("name = Jesús;",
                     "areEqual(userBll.name, 'Jesús')");
                 assert("physicalActivity = 'Jesús'",
@@ -270,10 +325,34 @@
                     "areEqual(userBll.sex, User.SEXES.MALE)");
                 assert("startingDate = 1/1/2014",
                     "areEqual(userBll.startingDate, new Date(2014, 1 - 1, 1))");
-                assert("targetWeight = TODO", false);
-                assert("targetWeights = TODO", false);
-                assert("week = TODO", false);
-                assert("weeks = TODO", false);
+                try {
+                    userBll.targetWeight;
+                    assert("targetWeight = TODO", false);
+                } catch (e) {
+                    assert("targetWeight = TODO",
+                        "areEqual('" + e.toString() + "', new NotYetImplementedException().toString())");
+                };
+                try {
+                    userBll.targetWeights;
+                    assert("targetWeights = TODO", false);
+                } catch (e) {
+                    assert("targetWeights = TODO",
+                        "areEqual('" + e.toString() + "', new NotYetImplementedException().toString())");
+                };
+                try {
+                    userBll.week;
+                    assert("week = TODO", false);
+                } catch (e) {
+                    assert("week = TODO",
+                        "areEqual('" + e.toString() + "', new NotYetImplementedException().toString())");
+                };
+                try {
+                    userBll.weeks;
+                    assert("weeks = TODO", false);
+                } catch (e) {
+                    assert("weeks = TODO",
+                        "areEqual('" + e.toString() + "', new NotYetImplementedException().toString())");
+                };
                 assert("weight = 82.2",
                     "areEqual(userBll.weight, 82.2)");
                 assert("weights = [{id: 1, date: 1/1/2014, weight: 82.2}]",
