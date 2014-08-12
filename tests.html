@@ -27,6 +27,13 @@
                 MALE: 1,
                 FEMALE: 2
             };
+            User.PHYSICAL_ACTIVITIES = {
+                LITTLE_TO_NO: 1,
+                LIGHT: 2,
+                MODERATE: 3,
+                HEAVY: 4,
+                VERY_HEAVY: 5
+            };
             /**
              * Classes
              */
@@ -49,6 +56,27 @@
                 }
                 var getBodyMassIndex = function (weight, height) {
                     return round(weight / Math.pow(height, 2));
+                }
+                var getdailyCaloricNeeds = function (physicalActivity) {
+                    var calorias;
+                    switch (physicalActivity) {
+                    case 1: // Little to no exercise
+                        calorias = this.TMB * 1.2;
+                        break;
+                    case 2: // Ejercicio ligero (1-3 días a la week)
+                        calorias = this.TMB * 1.375;
+                        break;
+                    case 3: // Ejercicio moderado (3-5 días a la week)
+                        calorias = this.TMB * 1.55;
+                        break;
+                    case 4: // Ejercicio fuerte (6-7 días a la week)
+                        calorias = this.TMB * 1.725;
+                        break;
+                    case 5: // Ejercicio muy fuerte (dos veces al día, entrenamientos muy duros)
+                        calorias = this.TMB * 1.9;
+                        break;
+                    }
+                    return calorias;
                 }
                 var isArray = function (array) {
                     return Object.prototype.toString.call(array) === '[object Array]';
@@ -287,6 +315,23 @@
             });
         })();
     </script>
+    <style>
+        @font-face {
+            font-family: 'Helvetica Neue';
+            src: local("Helvetica Neue Light"), local("HelveticaNeue-Light"), url("/fonts/HelveticaNeue-Light.ttf") format("truetype"), url("/fonts/HelveticaNeue-Light.woff") format("woff");
+            font-weight: 300;
+        }
+        body {
+            margin: 0px;
+            padding: 0px;
+            -webkit-font-smoothing: antialiased;
+            font-family: "Helvetica Neue", sans-serif;
+            font-weight: 300;
+            font-size: 15px;
+            line-height: 1.2;
+            -ms-content-zooming: none;
+        }
+    </style>
 </head>
 
 <body>
