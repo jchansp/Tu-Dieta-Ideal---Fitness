@@ -18,6 +18,12 @@
             }
             MyError.prototype = new TypeError();
             MyError.prototype.constructor = MyError;
+            window.NotYetImplementedException = function (message) {
+                this.name = 'NotYetImplementedException';
+                this.message = message || 'this operation is not supported';
+            }
+            NotYetImplementedException.prototype = new Error();
+            NotYetImplementedException.prototype.constructor = NotYetImplementedException;
 
             window.User = {};
             /**
