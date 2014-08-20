@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
@@ -12,7 +12,7 @@
         (function () {
             'use strict';
 
-            setTimeout('window.location.reload()', 5000);
+            //setTimeout('window.location.reload()', 5000);
 
             window.MyError = function (message) {
                 this.name = 'MyError';
@@ -52,6 +52,7 @@
                 var _physicalActivity;
                 var _sex;
                 var _weights;
+                var _UserDAL;
                 /**
                  * Private functions
                  */
@@ -130,7 +131,7 @@
                     return getDailyCaloricNeeds(this.physicalActivity, this.basalMetabolicRate);
                 });
                 this.__defineGetter__('dateOfBirth', function () {
-                    return _dateOfBirth;
+                    return _UserDAL.dateOfBirth;
                 });
                 this.__defineSetter__('dateOfBirth', function (dateOfBirth) {
                     if (!dateOfBirth || !isDate(dateOfBirth))
@@ -226,6 +227,112 @@
                     });
                     _weights = weights;
                 });
+                this.__defineGetter__('UserDAL', function () {
+                    return _UserDAL;
+                });
+                this.__defineSetter__('UserDAL', function (UserDAL) {
+                    _UserDAL = UserDAL;
+                });
+                /**
+                 * Constructor
+                 */
+                this.dateOfBirth = _User.dateOfBirth;
+                this.height = _User.height;
+                this.name = _User.name;
+                this.physicalActivity = _User.physicalActivity;
+                this.sex = _User.sex;
+                this.weights = _User.weights;
+                this.UserDAL = new User.DAL(_User);
+            };
+
+            User.DAL = function (_User) {
+                /**
+                 * Private functions
+                 */
+                var retrieveString = function (key) {
+                    return window.localStorage.getItem(key);
+                };
+                var retrieveNumber = function (key) {
+                    return retrieveString(key);
+                };
+                var retrieveDate = function (key) {
+                    return new Date(retrieveString(key));
+                };
+                var retrieveArray = function (key) {
+                    return retrieveString(key);
+                };
+                var retrieveObject = function (key) {
+                    return retrieveString(key);
+                };
+                var retrieve = function (key) {
+                    var value = window.localStorage.getItem(key);
+                    if (isNumber(JSONtoNumber(value))) value = round(value);
+                    else if (isDate(JSONtoDate(value))) value = value;
+                    return value;
+                };
+                var storeArray = function (key, value) {
+                    storeString(key, value);
+                };
+                var storeDate = function (key, value) {
+                    storeString(key, value);
+                };
+                var storeNumber = function (key, value) {
+                    storeString(key, value);
+                };
+                var storeObject = function (key, value) {
+                    storeString(key, value);
+                };
+                var storeString = function (key, value) {
+                    window.localStorage.setItem(key, value);
+                };
+                var store = function (key, value) {
+                    if (isDate(value))
+                        window.localStorage.setItem(key, dateToString(value));
+                    else if (isArray(value))
+                        window.localStorage.setItem(key, JSON.stringify(value));
+                    else
+                        window.localStorage.setItem(key, value);
+                };
+                /**
+                 * Getters & Setters
+                 */
+                this.__defineGetter__('dateOfBirth', function () {
+                    return retrieveDate('dateOfBirth');
+                });
+                this.__defineSetter__('dateOfBirth', function (dateOfBirth) {
+                    //storeDate('dateOfBirth', dateOfBirth.toISOString().replace('"', '').split('T')[0]);
+                    storeDate('dateOfBirth', dateOfBirth);
+                });
+                this.__defineGetter__('height', function () {
+                    return retrieveNumber('height');
+                });
+                this.__defineSetter__('height', function (height) {
+                    storeNumber('height', height);
+                });
+                this.__defineGetter__('name', function () {
+                    return retrieveString('name');
+                });
+                this.__defineSetter__('name', function (name) {
+                    storeString('name', name);
+                });
+                this.__defineGetter__('physicalActivity', function () {
+                    return retrieveString('physicalActivity');
+                });
+                this.__defineSetter__('physicalActivity', function (physicalActivity) {
+                    storeNumber('physicalActivity', physicalActivity);
+                });
+                this.__defineGetter__('sex', function () {
+                    return retrieveNumber('sex');
+                });
+                this.__defineSetter__('sex', function (sex) {
+                    storeNumber('sex', sex);
+                });
+                this.__defineGetter__('weights', function () {
+                    return retrieveArray('weights');
+                });
+                this.__defineSetter__('weights', function (weights) {
+                    storeArray('weights', weights);
+                });
                 /**
                  * Constructor
                  */
@@ -236,20 +343,6 @@
                 this.sex = _User.sex;
                 this.weights = _User.weights;
             };
-
-            /*User.DAL = function (dateOfBirth,
-                height,
-                name,
-                physicalActivity,
-                sex,
-                weights) {
-                this.dateOfBirth = isDate(dateOfBirth) ? dateOfBirth : undefined;
-                this.height = isNumber(height) ? height : undefined;
-                this.name = isString(name) ? name : undefined;
-                this.physicalActivity = isNumber(physicalActivity) ? physicalActivity : undefined;
-                this.sex = isString(sex) ? sex : undefined;
-                this.weights = isArray(weights) ? weights : undefined;
-            };*/
 
             window.addEventListener('DOMContentLoaded', function () {
                 var content = '';
